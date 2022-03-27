@@ -21,6 +21,26 @@ class PosNeg(object):
         tensor_pos[tensor_pos == 1]             = float('Inf')
         out                    = torch.cat([tensor_pos,tensor], dim=0)
         return out
+    
+## Intensity to latency encoding
+class IntensityTranslation(object):
+    def __init__(self, gamma_time):
+        self.gamma_time = gamma_time
+        pass
+
+    def __call__(self, tensor):
+        # Use finer granularity if input max isn't too large
+        maxt                                    = torch.max(tensor)
+        # renormalize tensor to use the finer granularity
+        tensor = tensor / maxt
+        # copy this to use as output
+        # original tensor used for compare
+        spike_tensor = tensor.clone()
+        # delay: 0-gamma -> value: 0-maxt
+        # granularity is maxt/gamma
+        spike_tensor = self.gamma_time - spike_tensor * self.gamma_time
+        spike_tensor[spike_tensor > (self.gamma_time - 1)] = float('Inf')
+        return spike_tensor
 
 
 class DualTNNVoterTallyLayer(nn.Module):
