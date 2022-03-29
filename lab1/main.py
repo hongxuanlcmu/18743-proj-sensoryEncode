@@ -63,7 +63,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 train_loader = DataLoader(MNIST('./data', True, download=True, transform=transforms.Compose(
                                                                     [
                                                                      transforms.ToTensor(),
-                                                                     PosNeg(0.5)
+                                                                     IntensityTranslation(8)
                                                                     ]
                                                                                        )
                                ),
@@ -74,7 +74,7 @@ train_loader = DataLoader(MNIST('./data', True, download=True, transform=transfo
 test_loader = DataLoader(MNIST('./data', False, download=True, transform=transforms.Compose(
                                                                     [
                                                                      transforms.ToTensor(),
-                                                                     PosNeg(0.5)
+                                                                     IntensityTranslation(8)
                                                                     ]
                                                                                        )
                                ),
@@ -182,11 +182,14 @@ elif args.mode == 1:
     weights_save = 1
 
     ### Layer Initialization ###
-
-    clayer = TNNColumnLayer(28, 28, 1, 2, 12, 400, ntype="rnl", device=device, w_init="normal")
-
+    # filter layer
+    flayer = OnOffCenterFilter(28, 3, 1, wres=3, device = device)
+    clayer = TNNColumnLayer(26, 26, 1, 2, 12, 400, ntype="rnl", device=device, w_init="normal")
+    
+    
     if cuda:
         clayer.cuda()
+        flayer.cuda()
 
 
     ### Training ###
@@ -203,8 +206,9 @@ elif args.mode == 1:
             if cuda:
                 data                    = data.cuda()
                 target                  = target.cuda()
-
-            out1, layer_in1, layer_out1 = clayer(data[0].permute(1,2,0))
+            filteredLayer = flayer(data[0].permute(1,2,0))
+            # TODO instead of sending to clayer, send to flayer then to clayer
+            out1, layer_in1, layer_out1 = clayer(filteredLayer)
             clayer.weights = clayer.stdp(layer_in1, layer_out1, clayer.weights, ucapture, usearch, ubackoff)
 
             endt                   = time.time()
@@ -220,7 +224,7 @@ elif args.mode == 1:
 
         image_list = []
         for i in range(12):
-            temp = clayer.weights[i].reshape(56,28)
+            temp = clayer.weights[i].reshape(52,26)
             image_list.append(temp)
 
         out = torch.stack(image_list, dim=0).unsqueeze(1)
@@ -242,8 +246,8 @@ elif args.mode == 1:
         if cuda:
             data                    = data.cuda()
             target                  = target.cuda()
-
-        out1, layer_in1, layer_out1 = clayer(data[0].permute(1,2,0))
+        filteredLayer = flayer(data[0].permute(1,2,0))
+        out1, layer_in1, layer_out1 = clayer(filteredLayer)
         out = torch.flatten(out1)
 
         arg = torch.nonzero(out != float('Inf'))

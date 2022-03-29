@@ -67,6 +67,51 @@ import torch.nn.functional as F
 ##                                    appropriately reshaped as (nums, p) to match the shape of weights. Note, all
 ##                                    synapses for a particular neuron see the same output spiketime of that neuron.
 
+class OnOffCenterFilter(nn.Module):
+    def __init__(self, inputsize, rfsize, stride, wres=3, device="cpu"):
+        super(OnOffCenterFilter, self).__init__()
+        # fixed rfsize of 3x3, single channel of delays (nprev = 1)
+        rfsize = 3
+        # nprev = 1
+        # Automatically convert to tuple if only a single value is provided
+        if not isinstance(inputsize,tuple):
+            inputsize      = (inputsize,inputsize)
+        if not isinstance(rfsize,tuple):
+            rfsize         = (rfsize,rfsize)
+        
+        self.device        = device
+        self.rfsize        = rfsize
+        self.stride        = stride
+        self.gamma         = 2**wres
+        # self.rows * self.cols gives the total number of RFs (equiavalently the total number of TNN columns) in
+        # the current layer.
+        # Note that each RF maps to a single TNN column.
+        self.rows          = ((inputsize[0]-rfsize[0])//stride) + 1
+        self.cols          = ((inputsize[1]-rfsize[1])//stride) + 1
+        
+        self.spikeThre = 7
+        
+    def __call__(self, data):
+        sliced_data = data.unfold(0, self.rfsize[0], self.stride).unfold(1, self.rfsize[1],self.stride).squeeze() #26x26x3x3 
+        rowIndices = torch.arange(self.rows).unsqueeze(1).repeat(1,self.cols).to(self.device)
+        columnIndices = torch.arange(self.cols).repeat(self.rows).reshape(self.rows, self.cols).to(self.device)
+        #filterIndices = torch.arange(self.rfsize[0])
+        #EdgeBrighterThanCenter = torch.ones(self.rows, self.cols,self.rfsize[0], self.rfsize[1])
+        centerValues = sliced_data[rowIndices,columnIndices,1,1].unsqueeze(2).unsqueeze(3).repeat(1,1,3,3)
+        EdgeBrighterThanCenter = sliced_data < centerValues
+        CenterBrighterThanEdge = sliced_data > centerValues
+        EdgeBrighterThanCenter_cnt = torch.sum(EdgeBrighterThanCenter, [2,3])
+        CenterBrighterThanEdge_cnt = torch.sum(CenterBrighterThanEdge, [2,3])
+        maxGamma = torch.ones(self.rows,self.cols).to(self.device) * self.gamma
+        onCenterSpike = maxGamma - CenterBrighterThanEdge_cnt
+        offCenterSpike = maxGamma - EdgeBrighterThanCenter_cnt
+        onCenterSpike[onCenterSpike >= self.spikeThre] = float('Inf')
+        offCenterSpike[offCenterSpike >= self.spikeThre] = float('Inf')
+        onCenterSpike = onCenterSpike.unsqueeze(2)
+        offCenterSpike = offCenterSpike.unsqueeze(2)
+        encoded = torch.cat([onCenterSpike, offCenterSpike], dim=2)
+        return encoded
+        
 
 class TNNColumnLayer(nn.Module):
     def __init__(self, inputsize, rfsize, stride, nprev, q, theta, wres=3, w_init="half", ntype="rnl",                  device="cpu"):
@@ -87,6 +132,9 @@ class TNNColumnLayer(nn.Module):
         self.rows          = ((inputsize[0]-rfsize[0])//stride) + 1
         self.cols          = ((inputsize[1]-rfsize[1])//stride) + 1
 
+        # nprev = number of channels
+        # eg for input posneg is 2 channels,
+        # for first layer output with 12 neurons is 12 channels
         # Note that each input in an nxn RF goes to all neurons within the corresponding column and each RF input
         # has nprev values/channels. Therefore each neuron gets n^2*nprev inputs resulting in as many synapses.
         self.p             = rfsize[0]*rfsize[1]*nprev
