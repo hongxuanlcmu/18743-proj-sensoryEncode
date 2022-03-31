@@ -97,16 +97,31 @@ class OnOffCenterFilter(nn.Module):
         columnIndices = torch.arange(self.cols).repeat(self.rows).reshape(self.rows, self.cols).to(self.device)
         #filterIndices = torch.arange(self.rfsize[0])
         #EdgeBrighterThanCenter = torch.ones(self.rows, self.cols,self.rfsize[0], self.rfsize[1])
-        centerValues = sliced_data[rowIndices,columnIndices,1,1].unsqueeze(2).unsqueeze(3).repeat(1,1,3,3)
-        EdgeBrighterThanCenter = sliced_data < centerValues
-        CenterBrighterThanEdge = sliced_data > centerValues
-        EdgeBrighterThanCenter_cnt = torch.sum(EdgeBrighterThanCenter, [2,3])
-        CenterBrighterThanEdge_cnt = torch.sum(CenterBrighterThanEdge, [2,3])
+        # centerValues = sliced_data[rowIndices,columnIndices,1,1].unsqueeze(2).unsqueeze(3).repeat(1,1,3,3)
+        # TODO set a threshold here, and compare to that threshold instead of centerValues
+        median = torch.median(sliced_data)
+        # TODO check if the center values are above or below the threshold and decide if cancel the fire
+        EdgeBrighterThanMedian = sliced_data < median
+        MedianBrighterThanEdge = sliced_data > median
+        # print(EdgeBrighterThanMedian.size())
+        # input("Press Enter to continue...")
+        MedianBrighterThanCenter = sliced_data[rowIndices,columnIndices,1,1] < median
+        CenterBrighterThanMedian = sliced_data[rowIndices,columnIndices,1,1] > median
+        # print(MedianBrighterThanCenter.size())
+        # input("Press Enter to continue...")
+
+        # TODO if edge brigher than center but center is brigher than median?
+        EdgeBrighterThanCenter_cnt = torch.sum(EdgeBrighterThanMedian, [2,3])
+        CenterBrighterThanEdge_cnt = torch.sum(MedianBrighterThanEdge, [2,3])
+        # print(EdgeBrighterThanCenter_cnt.size())
+        # input("Press Enter to continue...")
         maxGamma = torch.ones(self.rows,self.cols).to(self.device) * self.gamma
         onCenterSpike = maxGamma - CenterBrighterThanEdge_cnt
         offCenterSpike = maxGamma - EdgeBrighterThanCenter_cnt
-        onCenterSpike[onCenterSpike >= self.spikeThre] = float('Inf')
-        offCenterSpike[offCenterSpike >= self.spikeThre] = float('Inf')
+        # TODO if median brighter than center, not on center
+        onCenterSpike[MedianBrighterThanCenter] = float('Inf')
+        # TODO if center brighter than median, not off center
+        offCenterSpike[CenterBrighterThanMedian] = float('Inf')
         onCenterSpike = onCenterSpike.unsqueeze(2)
         offCenterSpike = offCenterSpike.unsqueeze(2)
         encoded = torch.cat([onCenterSpike, offCenterSpike], dim=2)
