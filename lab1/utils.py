@@ -39,7 +39,7 @@ class IntensityTranslation(object):
         # delay: 0-gamma -> value: 0-maxt
         # granularity is maxt/gamma
         spike_tensor = self.gamma_time - spike_tensor * self.gamma_time
-        spike_tensor[spike_tensor > (self.gamma_time - 1)] = float('Inf')
+        # spike_tensor[spike_tensor > (self.gamma_time - 1)] = float('Inf')
         return spike_tensor
 
 

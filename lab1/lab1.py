@@ -95,32 +95,21 @@ class OnOffCenterFilter(nn.Module):
         sliced_data = data.unfold(0, self.rfsize[0], self.stride).unfold(1, self.rfsize[1],self.stride).squeeze() #26x26x3x3 
         rowIndices = torch.arange(self.rows).unsqueeze(1).repeat(1,self.cols).to(self.device)
         columnIndices = torch.arange(self.cols).repeat(self.rows).reshape(self.rows, self.cols).to(self.device)
-        #filterIndices = torch.arange(self.rfsize[0])
-        #EdgeBrighterThanCenter = torch.ones(self.rows, self.cols,self.rfsize[0], self.rfsize[1])
-        # centerValues = sliced_data[rowIndices,columnIndices,1,1].unsqueeze(2).unsqueeze(3).repeat(1,1,3,3)
-        # TODO set a threshold here, and compare to that threshold instead of centerValues
-        median = torch.median(sliced_data)
-        # TODO check if the center values are above or below the threshold and decide if cancel the fire
+        median = self.gamma / 2
+        # check if the center values are above or below the threshold and decide if cancel the fire
         EdgeBrighterThanMedian = sliced_data < median
         MedianBrighterThanEdge = sliced_data > median
-        # print(EdgeBrighterThanMedian.size())
-        # input("Press Enter to continue...")
         MedianBrighterThanCenter = sliced_data[rowIndices,columnIndices,1,1] < median
         CenterBrighterThanMedian = sliced_data[rowIndices,columnIndices,1,1] > median
-        # print(MedianBrighterThanCenter.size())
-        # input("Press Enter to continue...")
 
-        # TODO if edge brigher than center but center is brigher than median?
-        EdgeBrighterThanCenter_cnt = torch.sum(EdgeBrighterThanMedian, [2,3])
-        CenterBrighterThanEdge_cnt = torch.sum(MedianBrighterThanEdge, [2,3])
-        # print(EdgeBrighterThanCenter_cnt.size())
-        # input("Press Enter to continue...")
+        EdgeBrighterThanMedian_cnt = torch.sum(EdgeBrighterThanMedian, [2,3])
+        MedianBrighterThanEdge_cnt = torch.sum(MedianBrighterThanEdge, [2,3])
         maxGamma = torch.ones(self.rows,self.cols).to(self.device) * self.gamma
-        onCenterSpike = maxGamma - CenterBrighterThanEdge_cnt
-        offCenterSpike = maxGamma - EdgeBrighterThanCenter_cnt
-        # TODO if median brighter than center, not on center
+        onCenterSpike = maxGamma - MedianBrighterThanEdge_cnt
+        offCenterSpike = maxGamma - EdgeBrighterThanMedian_cnt
+        # if median brighter than center, not on center
         onCenterSpike[MedianBrighterThanCenter] = float('Inf')
-        # TODO if center brighter than median, not off center
+        # if center brighter than median, not off center
         offCenterSpike[CenterBrighterThanMedian] = float('Inf')
         onCenterSpike = onCenterSpike.unsqueeze(2)
         offCenterSpike = offCenterSpike.unsqueeze(2)

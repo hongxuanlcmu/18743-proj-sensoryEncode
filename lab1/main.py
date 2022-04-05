@@ -37,7 +37,7 @@ ubackoff  = 1/2
 
 ### Column Layer Parameters ###
 
-inputsize = 28
+inputsize = 26
 rfsize    = 3
 stride    = 1
 nprev     = 2
@@ -46,8 +46,8 @@ theta     = 4
 
 ### Voter Layer Parameters ###
 
-rows_v    = 26
-cols_v    = 26
+rows_v    = 24
+cols_v    = 24
 nprev_v   = 12
 classes_v = 10
 thetav_lo = 1/32
@@ -284,11 +284,13 @@ elif args.mode == 2:
 
     ### Layer Initialization ###
 
+    flayer = OnOffCenterFilter(28, 3, 1, wres=3, device = device)
     clayer = TNNColumnLayer(inputsize, rfsize, stride, nprev, neurons, theta, ntype="rnl", device=device)
     vlayer = DualTNNVoterTallyLayer(rows_v, cols_v, nprev_v, classes_v, thetav_lo, thetav_hi, tau_eff,\
                                     device=device)
 
     if cuda:
+        flayer.cuda()
         clayer.cuda()
         vlayer.cuda()
 
@@ -320,7 +322,8 @@ elif args.mode == 2:
                 else:
                     target[0] = target[0] - 1
 
-            out1, layer_in1, layer_out1 = clayer(data[0].permute(1,2,0))
+            filteredLayer = flayer(data[0].permute(1,2,0))
+            out1, layer_in1, layer_out1 = clayer(filteredLayer)
             pred, voter_in, _           = vlayer(out1)
 
             if torch.argmax(pred) != target[0]:
