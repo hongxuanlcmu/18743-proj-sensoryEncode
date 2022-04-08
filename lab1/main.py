@@ -138,7 +138,7 @@ if args.mode == 1:
     if weights_save == 1:
 
         image_list = []
-        for i in range(12):
+        for i in range(neurons):
             temp = clayer.weights[i].reshape(inputsize * 2, inputsize)
             image_list.append(temp)
 
