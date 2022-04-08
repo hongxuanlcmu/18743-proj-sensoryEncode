@@ -6,7 +6,7 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
 import torchvision
-from torchvision.datasets import MNIST
+from torchvision.datasets import MNIST, CIFAR10
 from torchvision import transforms
 from torchvision.utils import save_image
 
@@ -35,9 +35,15 @@ ucapture  = 1/2
 usearch   = 1/1024
 ubackoff  = 1/2
 
+### Filter Layer Parameters ###
+
+rawsize      = 32
+filter_rfsize    = 3
+filter_stride    = 1
+
 ### Column Layer Parameters ###
 
-inputsize = 26
+inputsize = ((rawsize - filter_rfsize)//filter_stride) + 1
 rfsize    = 3
 stride    = 1
 nprev     = 2
@@ -60,9 +66,10 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 ### MNIST dataset loading and preprocessing ###
 
-train_loader = DataLoader(MNIST('./data', True, download=True, transform=transforms.Compose(
+train_loader = DataLoader(CIFAR10('./data', True, download=True, transform=transforms.Compose(
                                                                     [
                                                                      transforms.ToTensor(),
+                                                                     transforms.Grayscale(),
                                                                      IntensityTranslation(8)
                                                                     ]
                                                                                        )
@@ -71,9 +78,10 @@ train_loader = DataLoader(MNIST('./data', True, download=True, transform=transfo
                           shuffle=False
                          )
 
-test_loader = DataLoader(MNIST('./data', False, download=True, transform=transforms.Compose(
+test_loader = DataLoader(CIFAR10('./data', False, download=True, transform=transforms.Compose(
                                                                     [
                                                                      transforms.ToTensor(),
+                                                                     transforms.Grayscale(),
                                                                      IntensityTranslation(8)
                                                                     ]
                                                                                        )
@@ -81,110 +89,17 @@ test_loader = DataLoader(MNIST('./data', False, download=True, transform=transfo
                           batch_size=1,
                           shuffle=False
                          )
-
-
-######################## Step-No-Leak Column Simulation ##################
-if args.mode == 0:
-
-    weights_save = 1
-
-    ### Layer Initialization ###
-
-    clayer = TNNColumnLayer(28, 28, 1, 2, 12, 400, ntype="snl", device=device)
-
-    if cuda:
-        clayer.cuda()
-
-
-    ### Training ###
-
-    print("Starting column training")
-    for epochs in range(1):
-        start = time.time()
-
-        for idx, (data,target) in enumerate(train_loader):
-            if idx == 10000:
-                break
-            print("Sample: {0}\r".format(idx), end="")
-
-            if cuda:
-                data                    = data.cuda()
-                target                  = target.cuda()
-
-            out1, layer_in1, layer_out1 = clayer(data[0].permute(1,2,0))
-            clayer.weights = clayer.stdp(layer_in1, layer_out1, clayer.weights, ucapture, usearch, ubackoff)
-
-            endt                   = time.time()
-            print("                                 Time elapsed: {0}\r".format(endt-start), end="")
-
-        end   = time.time()
-        print("Column training done in ", end-start)
-
-
-    ### Display and save weights as images ###
-
-    if weights_save == 1:
-
-        image_list = []
-        for i in range(12):
-            temp = clayer.weights[i].reshape(56,28)
-            image_list.append(temp)
-
-        out = torch.stack(image_list, dim=0).unsqueeze(1)
-        save_image(out, 'column_visweights_snl.png', nrow=6)
-
-
-    ### Testing and computing metrics ###
-
-    table    = torch.zeros((12,10))
-    pred     = torch.zeros(10)
-    totals   = torch.zeros(10)
-
-    print("Starting testing")
-    start    = time.time()
-
-    for idx, (data,target) in enumerate(test_loader):
-        print("Sample: {0}\r".format(idx), end="")
-
-        if cuda:
-            data                    = data.cuda()
-            target                  = target.cuda()
-
-        out1, layer_in1, layer_out1 = clayer(data[0].permute(1,2,0))
-        out = torch.flatten(out1)
-
-        arg = torch.nonzero(out != float('Inf'))
-
-        if arg.shape[0] != 0:
-            table[arg[0].long(), target[0]] += 1
-
-        endt = time.time()
-        print("                                 Time elapsed: {0}\r".format(endt-start), end="")
-
-    end = time.time()
-    print("Testing done in ", end-start)
-
-    print("Confusion Matrix:")
-    print(table)
-
-    maxval   = torch.max(table, 1)[0]
-    totals   = torch.sum(table, 1)
-    pred     = torch.sum(maxval)
-    covg_cnt = torch.sum(totals)
-
-    print("Purity: ", pred/covg_cnt)
-    print("Coverage: ", covg_cnt/(idx+1))
 
 
 ####################### Ramp-No-Leak Column Simulation #######################
-elif args.mode == 1:
+if args.mode == 1:
 
     weights_save = 1
 
     ### Layer Initialization ###
     # filter layer
-    flayer = OnOffCenterFilter(28, 3, 1, wres=3, device = device)
-    clayer = TNNColumnLayer(26, 26, 1, 2, 12, 400, ntype="rnl", device=device, w_init="normal")
+    flayer = OnOffCenterFilter(rawsize, filter_rfsize, filter_stride, wres=3, device = device)
+    clayer = TNNColumnLayer(inputsize, rfsize, stride, nprev, q=neurons, theta=400, wres=3,  w_init="normal", ntype="rnl", device=device)
     
     
     if cuda:
@@ -224,7 +139,7 @@ elif args.mode == 1:
 
         image_list = []
         for i in range(12):
-            temp = clayer.weights[i].reshape(52,26)
+            temp = clayer.weights[i].reshape(inputsize * 2, inputsize)
             image_list.append(temp)
 
         out = torch.stack(image_list, dim=0).unsqueeze(1)
@@ -365,8 +280,9 @@ elif args.mode == 2:
             target[0] = target[0] + 1
         else:
             target[0] = target[0] - 1
-
-        out1, layer_in1, layer_out1 = clayer(data[0].permute(1,2,0))
+        
+        filteredLayer = flayer(data[0].permute(1,2,0))
+        out1, layer_in1, layer_out1 = clayer(filteredLayer)
         pred, voter_in, _           = vlayer(out1)
 
         if torch.argmax(pred) != target[0]:
