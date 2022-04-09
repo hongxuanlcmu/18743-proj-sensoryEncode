@@ -50,13 +50,15 @@ class IntensityTranslation(object):
         maxt                                    = torch.max(tensor)
 
         spike_tensor = tensor.clone()
-        # renormalize spike_tensor to use the finer granularity
+        # translate raw data into indices of the nonlinear intensity of gamma8
         spike_tensor = (spike_tensor / maxt * (self.gamma8.size()[0] - 1)).long()
+        # from indices to gamma8 intensity
+        # spike_tensor = self.gamma8[spike_tensor]
         # delay: 0-gamma -> value: 0-maxt
         # granularity is maxt/gamma
-        spike_tensor = (self.gamma8.size()[0]) - self.gamma8[spike_tensor]
-        spike_tensor = spike_tensor / len(self.gamma8)
-        spike_tensor = self.gamma_time - spike_tensor * self.gamma_time
+        # spike_tensor = (self.gamma8.size()[0]) - self.gamma8[spike_tensor]
+        # spike_tensor = spike_tensor / len(self.gamma8)
+        spike_tensor = self.gamma_time - spike_tensor / (self.gamma8.size()[0]) * self.gamma_time
         
         # spike_tensor[spike_tensor > (self.gamma_time - 1)] = float('Inf')
         return spike_tensor

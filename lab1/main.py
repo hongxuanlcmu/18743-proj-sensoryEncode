@@ -6,7 +6,7 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
 import torchvision
-from torchvision.datasets import MNIST
+from torchvision.datasets import MNIST, CIFAR10
 from torchvision import transforms
 from torchvision.utils import save_image
 
@@ -63,6 +63,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 train_loader = DataLoader(MNIST('./data', True, download=True, transform=transforms.Compose(
                                                                     [
                                                                      transforms.ToTensor(),
+                                                                    #  transforms.Grayscale(),
                                                                      IntensityTranslation(8)
                                                                     ]
                                                                                        )
@@ -74,6 +75,7 @@ train_loader = DataLoader(MNIST('./data', True, download=True, transform=transfo
 test_loader = DataLoader(MNIST('./data', False, download=True, transform=transforms.Compose(
                                                                     [
                                                                      transforms.ToTensor(),
+                                                                    #  transforms.Grayscale(),
                                                                      IntensityTranslation(8)
                                                                     ]
                                                                                        )
@@ -185,7 +187,9 @@ elif args.mode == 1:
     # filter layer
     flayer = OnOffCenterFilter(28, 3, 1, wres=3, device = device)
     clayer = TNNColumnLayer(26, 26, 1, 2, 12, 400, ntype="rnl", device=device, w_init="normal")
-    
+    # def __init__(self, inputsize, rfsize, stride, nprev, q, theta, wres=3, w_init="half", ntype="rnl",                  device="cpu"):
+    # def __init__(self, inputsize, rfsize, stride, wres=3, device="cpu"):
+
     
     if cuda:
         clayer.cuda()
@@ -197,7 +201,8 @@ elif args.mode == 1:
     print("Starting column training")
     for epochs in range(1):
         start = time.time()
-
+        image_list = []
+        input_image_list = []
         for idx, (data,target) in enumerate(train_loader):
             if idx == 10000:
                 break
@@ -207,6 +212,17 @@ elif args.mode == 1:
                 data                    = data.cuda()
                 target                  = target.cuda()
             filteredLayer = flayer(data[0].permute(1,2,0))
+
+            
+            if idx < 12:
+                image_list.append(filteredLayer.permute(2,0,1).reshape(52,26))
+                input_image_list.append(data[0].squeeze())
+            if idx == 12:
+                out = 256 - torch.stack(image_list, dim=0).unsqueeze(1) * 256/8
+                save_image(out, 'input_images_seletion.png', nrow=6)
+                input_out = 256 - torch.stack(input_image_list, dim=0).unsqueeze(1) * 256/8
+                save_image(input_out, 'greyscale_images_seletion.png', nrow=6)
+
             # TODO instead of sending to clayer, send to flayer then to clayer
             out1, layer_in1, layer_out1 = clayer(filteredLayer)
             clayer.weights = clayer.stdp(layer_in1, layer_out1, clayer.weights, ucapture, usearch, ubackoff)
@@ -366,7 +382,8 @@ elif args.mode == 2:
         else:
             target[0] = target[0] - 1
 
-        out1, layer_in1, layer_out1 = clayer(data[0].permute(1,2,0))
+        filteredLayer = flayer(data[0].permute(1,2,0))
+        out1, layer_in1, layer_out1 = clayer(filteredLayer)
         pred, voter_in, _           = vlayer(out1)
 
         if torch.argmax(pred) != target[0]:
