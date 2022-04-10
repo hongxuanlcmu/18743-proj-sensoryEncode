@@ -64,6 +64,7 @@ train_loader = DataLoader(MNIST('./data', True, download=True, transform=transfo
                                                                     [
                                                                      transforms.ToTensor(),
                                                                     #  transforms.Grayscale(),
+# torch.nn.functional.conv2d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) → Tensor
                                                                      IntensityTranslation(8)
                                                                     ]
                                                                                        )
@@ -185,15 +186,15 @@ elif args.mode == 1:
 
     ### Layer Initialization ###
     # filter layer
-    flayer = OnOffCenterFilter(28, 3, 1, wres=3, device = device)
-    clayer = TNNColumnLayer(26, 26, 1, 2, 12, 400, ntype="rnl", device=device, w_init="normal")
+    #flayer = OnOffCenterFilter(28, 3, 1, wres=3, device = device)
+    clayer = TNNColumnLayer(28, 28, 1, 2, 12, 400, ntype="rnl", device=device, w_init="normal")
     # def __init__(self, inputsize, rfsize, stride, nprev, q, theta, wres=3, w_init="half", ntype="rnl",                  device="cpu"):
     # def __init__(self, inputsize, rfsize, stride, wres=3, device="cpu"):
 
     
     if cuda:
         clayer.cuda()
-        flayer.cuda()
+        # flayer.cuda()
 
 
     ### Training ###
@@ -211,20 +212,20 @@ elif args.mode == 1:
             if cuda:
                 data                    = data.cuda()
                 target                  = target.cuda()
-            filteredLayer = flayer(data[0].permute(1,2,0))
+            # filteredLayer = flayer(data[0].permute(1,2,0))
 
             
             if idx < 12:
-                image_list.append(filteredLayer.permute(2,0,1).reshape(52,26))
+                # image_list.append(filteredLayer.permute(2,0,1).reshape(52,26))
                 input_image_list.append(data[0].squeeze())
             if idx == 12:
-                out = 256 - torch.stack(image_list, dim=0).unsqueeze(1) * 256/8
-                save_image(out, 'input_images_seletion.png', nrow=6)
+                # out = 256 - torch.stack(image_list, dim=0).unsqueeze(1) * 256/8
+                # save_image(out, 'input_images_seletion.png', nrow=6)
                 input_out = 256 - torch.stack(input_image_list, dim=0).unsqueeze(1) * 256/8
                 save_image(input_out, 'greyscale_images_seletion.png', nrow=6)
 
             # TODO instead of sending to clayer, send to flayer then to clayer
-            out1, layer_in1, layer_out1 = clayer(filteredLayer)
+            out1, layer_in1, layer_out1 = clayer(data[0].permute(1,2,0))
             clayer.weights = clayer.stdp(layer_in1, layer_out1, clayer.weights, ucapture, usearch, ubackoff)
 
             endt                   = time.time()
@@ -240,7 +241,7 @@ elif args.mode == 1:
 
         image_list = []
         for i in range(12):
-            temp = clayer.weights[i].reshape(52,26)
+            temp = clayer.weights[i].reshape(56,28)
             image_list.append(temp)
 
         out = torch.stack(image_list, dim=0).unsqueeze(1)
@@ -262,8 +263,8 @@ elif args.mode == 1:
         if cuda:
             data                    = data.cuda()
             target                  = target.cuda()
-        filteredLayer = flayer(data[0].permute(1,2,0))
-        out1, layer_in1, layer_out1 = clayer(filteredLayer)
+        # filteredLayer = flayer(data[0].permute(1,2,0))
+        out1, layer_in1, layer_out1 = clayer(data[0].permute(1,2,0))
         out = torch.flatten(out1)
 
         arg = torch.nonzero(out != float('Inf'))

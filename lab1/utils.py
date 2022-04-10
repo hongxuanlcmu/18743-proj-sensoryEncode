@@ -44,6 +44,15 @@ class IntensityTranslation(object):
         144,146,148,150,152,154,156,158,160,162,164,167,169,171,173,175,
         177,180,182,184,186,189,191,193,196,198,200,203,205,208,210,213,
         215,218,220,223,225,228,231,233,236,239,241,244,247,249,252,255])
+        # https://stackoverflow.com/questions/69424870/how-to-write-a-kernel-for-pytorch-convolution-function
+        self.kernel = torch.Tensor([[-0.07,-0.06,-0.05,-0.06,-0.07],
+                                    [-0.06,0.04,0.14,0.04,-0.06],
+                                    [-0.05,0.14,0.28,0.14,-0.05],
+                                    [-0.06,0.04,0.14,0.04,-0.06],
+                                    [-0.07,-0.06,-0.05,-0.06,-0.07]])
+        self.kernel = self.kernel.unsqueeze(0)
+        self.kernel = torch.cat([self.kernel,-self.kernel],0)
+        self.kernel = self.kernel.unsqueeze(1)
 
     def __call__(self, tensor):
         # Use finer granularity if input max isn't too large
@@ -52,6 +61,10 @@ class IntensityTranslation(object):
         spike_tensor = tensor.clone()
         # translate raw data into indices of the nonlinear intensity of gamma8
         spike_tensor = (spike_tensor / maxt * (self.gamma8.size()[0] - 1)).long()
+        conv_in = spike_tensor.unsqueeze(1)
+        #print(conv_in.size())
+        #print(self.kernel.size())
+        spike_tensor = F.conv2d(conv_in.float(), self.kernel, padding="same", stride=1)
         # from indices to gamma8 intensity
         # spike_tensor = self.gamma8[spike_tensor]
         # delay: 0-gamma -> value: 0-maxt
@@ -59,9 +72,10 @@ class IntensityTranslation(object):
         # spike_tensor = (self.gamma8.size()[0]) - self.gamma8[spike_tensor]
         # spike_tensor = spike_tensor / len(self.gamma8)
         spike_tensor = self.gamma_time - spike_tensor / (self.gamma8.size()[0]) * self.gamma_time
-        
         # spike_tensor[spike_tensor > (self.gamma_time - 1)] = float('Inf')
-        return spike_tensor
+        # print(spike_tensor.squeeze().size())
+        # input()
+        return spike_tensor.squeeze()
 
 
 class DualTNNVoterTallyLayer(nn.Module):
