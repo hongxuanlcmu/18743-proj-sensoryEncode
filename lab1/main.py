@@ -217,7 +217,7 @@ elif args.mode == 1:
             
             if idx < 12:
                 # image_list.append(filteredLayer.permute(2,0,1).reshape(52,26))
-                input_image_list.append(data[0].squeeze())
+                input_image_list.append(data[0].permute(2,0,1).reshape(56,28))
             if idx == 12:
                 # out = 256 - torch.stack(image_list, dim=0).unsqueeze(1) * 256/8
                 # save_image(out, 'input_images_seletion.png', nrow=6)
