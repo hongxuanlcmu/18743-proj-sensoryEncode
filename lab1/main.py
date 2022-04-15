@@ -37,18 +37,18 @@ ubackoff  = 1/2
 
 ### Column Layer Parameters ###
 
-inputsize = 26
+inputsize = 32
 rfsize    = 3
 stride    = 1
 nprev     = 2
-neurons   = 12
+neurons   = 24
 theta     = 4
 
 ### Voter Layer Parameters ###
 
-rows_v    = 24
-cols_v    = 24
-nprev_v   = 12
+rows_v    = 30
+cols_v    = 30
+nprev_v   = 24
 classes_v = 10
 thetav_lo = 1/32
 thetav_hi = 15/32
@@ -60,10 +60,10 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 ### MNIST dataset loading and preprocessing ###
 
-train_loader = DataLoader(MNIST('./data', True, download=True, transform=transforms.Compose(
+train_loader = DataLoader(CIFAR10('./data', True, download=True, transform=transforms.Compose(
                                                                     [
                                                                      transforms.ToTensor(),
-                                                                    #  transforms.Grayscale(),
+                                                                     transforms.Grayscale(),
                                                                      IntensityTranslation(8)
                                                                     ]
                                                                                        )
@@ -72,10 +72,10 @@ train_loader = DataLoader(MNIST('./data', True, download=True, transform=transfo
                           shuffle=False
                          )
 
-test_loader = DataLoader(MNIST('./data', False, download=True, transform=transforms.Compose(
+test_loader = DataLoader(CIFAR10('./data', False, download=True, transform=transforms.Compose(
                                                                     [
                                                                      transforms.ToTensor(),
-                                                                    #  transforms.Grayscale(),
+                                                                     transforms.Grayscale(),
                                                                      IntensityTranslation(8)
                                                                     ]
                                                                                        )
@@ -300,13 +300,13 @@ elif args.mode == 2:
 
     ### Layer Initialization ###
 
-    flayer = OnOffCenterFilter(28, 3, 1, wres=3, device = device)
+    # flayer = OnOffCenterFilter(28, 3, 1, wres=3, device = device)
     clayer = TNNColumnLayer(inputsize, rfsize, stride, nprev, neurons, theta, ntype="rnl", device=device)
     vlayer = DualTNNVoterTallyLayer(rows_v, cols_v, nprev_v, classes_v, thetav_lo, thetav_hi, tau_eff,\
                                     device=device)
 
     if cuda:
-        flayer.cuda()
+        # flayer.cuda()
         clayer.cuda()
         vlayer.cuda()
 
@@ -338,8 +338,9 @@ elif args.mode == 2:
                 else:
                     target[0] = target[0] - 1
 
-            filteredLayer = flayer(data[0].permute(1,2,0))
-            out1, layer_in1, layer_out1 = clayer(filteredLayer)
+            # filteredLayer = flayer(data[0].permute(1,2,0))
+            #print(data[0].size())
+            out1, layer_in1, layer_out1 = clayer(data[0].permute(1,2,0))
             pred, voter_in, _           = vlayer(out1)
 
             if torch.argmax(pred) != target[0]:
@@ -382,8 +383,8 @@ elif args.mode == 2:
         else:
             target[0] = target[0] - 1
 
-        filteredLayer = flayer(data[0].permute(1,2,0))
-        out1, layer_in1, layer_out1 = clayer(filteredLayer)
+        # filteredLayer = flayer(data[0].permute(1,2,0))
+        out1, layer_in1, layer_out1 = clayer(data[0].permute(1,2,0))
         pred, voter_in, _           = vlayer(out1)
 
         if torch.argmax(pred) != target[0]:
