@@ -30,8 +30,99 @@ module synapse_tb;
 
         //// Inputs begin ////
 
+        input_spike = 0;
+        inc = 0;
+        dec = 0;
+        aclk = 1;
+        gclk = 0;
+        rst = 1;
+
+        #25
+        rst = 0;
+
+        @(posedge gclk);
         
+        #5
+        input_spike = 1;
         
+        #8
+        input_spike = 0;
+        
+        #2
+        inc = 1;
+        
+        @(posedge gclk);
+
+        #1
+        input_spike = 1;
+
+        #8
+        input_spike = 0;
+
+        @(posedge gclk);
+
+        #3
+        input_spike = 1;
+
+        #8
+        input_spike = 0;
+
+        #2
+        inc = 0;
+        dec = 1;
+
+        @(posedge gclk);
+        #4
+        input_spike = 1;
+
+        #8
+        input_spike = 0;
+
+        #3
+        inc = 1;
+        dec = 0;
+
+        @(posedge gclk);
+
+        #2
+        input_spike = 1;
+
+        #8
+        input_spike = 0;
+        
+        @(posedge gclk);
+
+        #6
+        input_spike = 1;
+
+        #8
+        input_spike = 0;
+        
+        @(posedge gclk);
+
+        #5
+        input_spike = 1;
+
+        #8
+        input_spike = 0;
+        
+        @(posedge gclk);
+
+        #7
+        input_spike = 1;
+
+        #8
+        input_spike = 0;
+
+        @ (posedge gclk);
+        #5
+        rst = 1;
+
+        #5
+        rst = 0;
+        inc = 0;
+        dec = 0;
+
         //// Inputs end ////
 
         #200
@@ -43,10 +134,11 @@ module synapse_tb;
     #0.5 aclk = !aclk;
 
     initial i = 0;
-    always @ (aclk)
+    always @ (posedge aclk)
     begin
         i = i % 24;
-        if (i==0) gclk = ~gclk;
+        if (i==0) gclk = 1;
+        if (i==1) gclk = 0;
         i = i + 1;
     end
 

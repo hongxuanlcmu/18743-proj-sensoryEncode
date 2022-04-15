@@ -19,8 +19,10 @@ set AREA_RPT $REP_DIR/snl_area.rpt
 set TIME_RPT $REP_DIR/snl_time.rpt
 set POWER_RPT $REP_DIR/snl_power.rpt
 
-set top_mdl top_wrapper
+set top_mdl neuron_snl_grl
 define_design_lib WORK -path "./work"
+
+#set_dont_touch [get_cells {neuron_snl_grl}]
 
 # Small loop to read in several files
 set all_files {../../src/rtl/neuron_snl_grl.sv}
@@ -31,6 +33,7 @@ foreach file $all_files {
  analyze -format sverilog $both 
 }
 
+set_dont_touch [get_ports {output_spike}]
 
 elaborate $top_mdl
 link
@@ -42,15 +45,15 @@ set_wire_load_model -name 5K_hvratio_1_1
 set_fix_multiple_port_nets -all -buffer_constants [get_designs *]
 
 #Specify clock constraints
-source ../../tcl/snl_time.tcl
+#source ../../tcl/snl_time.tcl
 set_max_fanout 50 [get_designs $top_mdl]
 # Uniquify (optional) and compile
 check_design
-compile -map_effort medium
-# compile -map_effortt high -boundary_optimization
-compile -ungroup_all -map_effort medium
+compile -map_effort low
+#compile -map_effortt high -boundary_optimization
+#compile -ungroup_all -map_effort low
 
-remove_unconnected_ports -blast_buses [get_cells -hierarchical *]
+#remove_unconnected_ports -blast_buses [get_cells -hierarchical *]
 
 # change naming rules
 set bus_inference_style {%s[%d]} 
@@ -77,10 +80,9 @@ if {![file exists ${REP_DIR}]} {
 
 write -format verilog -hierarchy -output $OUT_DIR/{$top_mdl}_netlist.v
 write_sdf -version 1.0 $OUT_DIR/{$top_mdl}.sdf
-redirect $AREA_RPT { report_area -hier }
+redirect $AREA_RPT { report_area -hierarchy }
 # type 'man report_timing' withing DC shell to see what these options mean
 #redirect $TIME_RPT { report_timing -path full -delay max -max_paths 1 -nworst 1 -true }
 redirect $TIME_RPT { report_timing -path full -delay_type max -max_paths 100 -nworst 100 }
 redirect $POWER_RPT { report_power }
-exit
 

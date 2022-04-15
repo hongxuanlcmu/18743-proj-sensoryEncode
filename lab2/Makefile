@@ -59,12 +59,12 @@ synapse-sim:
 
 	if [ ! -d "$(SIM)" ]; then \
         mkdir $(SIM) && mkdir $(SIM)/synapse;\
-		cd $(SIM)/synapse && vcs -sverilog -debug_all -full64 -top synapse $(SRC)/tb/synapse_tb.sv $(SRC)/rtl/neuron_rnl_ptt.sv && ./simv ; \
+		cd $(SIM)/synapse && vcs -sverilog -debug_all -full64 -top synapse_tb $(SRC)/tb/synapse_tb.sv $(SRC)/rtl/neuron_rnl_ptt.sv && ./simv ; \
 	elif [ ! -d "$(SIM)/synapse" ]; then \
         mkdir $(SIM)/synapse;\
-		cd $(SIM)/synapse && vcs -sverilog -debug_all -full64 -top synapse $(SRC)/tb/synapse_tb.sv $(SRC)/rtl/neuron_rnl_ptt.sv && ./simv ; \
+		cd $(SIM)/synapse && vcs -sverilog -debug_all -full64 -top synapse_tb $(SRC)/tb/synapse_tb.sv $(SRC)/rtl/neuron_rnl_ptt.sv && ./simv ; \
 	else \
-		cd $(SIM)/synapse && vcs -sverilog -debug_all -full64 -top synapse $(SRC)/tb/synapse_tb.sv $(SRC)/rtl/neuron_rnl_ptt.sv && ./simv ; \
+		cd $(SIM)/synapse && vcs -sverilog -debug_all -full64 -top synapse_tb $(SRC)/tb/synapse_tb.sv $(SRC)/rtl/neuron_rnl_ptt.sv && ./simv ; \
 	fi; 
 
 
@@ -105,6 +105,33 @@ rnl-synth:
 	else \
 		cd $(SYNTH)/rnl_neuron && dc_shell -f $(CURDIR)/tcl/synth_rnl.tcl;\
 	fi;
+
+.PHONY: bitonic-synth
+bitonic-synth:
+	
+	if [ ! -d "$(SYNTH)" ]; then \
+		mkdir $(SYNTH) && mkdir $(SYNTH)/bitonic;\
+		cd $(SYNTH)/bitonic && dc_shell -f $(CURDIR)/tcl/synth_bitonic.tcl;\
+	elif [ ! -d "$(SYNTH)/bitonic" ]; then \
+		mkdir $(SYNTH)/bitonic;\
+		cd $(SYNTH)/bitonic && dc_shell -f $(CURDIR)/tcl/synth_bitonic.tcl;\
+	else \
+		cd $(SYNTH)/bitonic && dc_shell -f $(CURDIR)/tcl/synth_bitonic.tcl;\
+	fi;
+	
+.PHONY: synapse-synth
+synapse-synth:
+		
+	if [ ! -d "$(SYNTH)" ]; then \
+		mkdir $(SYNTH) && mkdir $(SYNTH)/synapse;\
+		cd $(SYNTH)/synapse && dc_shell -f $(CURDIR)/tcl/synth_synapse.tcl;\
+	elif [ ! -d "$(SYNTH)/synapse" ]; then \
+		mkdir $(SYNTH)/synapse;\
+		cd $(SYNTH)/synapse && dc_shell -f $(CURDIR)/tcl/synth_synapse.tcl;\
+	else \
+		cd $(SYNTH)/synapse && dc_shell -f $(CURDIR)/tcl/synth_synapse.tcl;\
+	fi;
+
 	
 
 .PHONY: cleanall

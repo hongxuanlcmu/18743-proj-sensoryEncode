@@ -15,11 +15,11 @@ set synlib_wait_for_design_license {DesignWare-Foundation}
 set OUT_DIR ./out
 set REP_DIR ./rep
 set RTL_DIR ../../src/rtl/
-set AREA_RPT $REP_DIR/rnl_area.rpt
-set TIME_RPT $REP_DIR/rnl_time.rpt
-set POWER_RPT $REP_DIR/rnl_power.rpt
+set AREA_RPT $REP_DIR/synapse_area.rpt
+set TIME_RPT $REP_DIR/synapse_time.rpt
+set POWER_RPT $REP_DIR/synapse_power.rpt
 
-set top_mdl neuron_rnl_ptt
+set top_mdl synapse
 define_design_lib WORK -path "./work"
 
 # Small loop to read in several files

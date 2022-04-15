@@ -15,22 +15,22 @@ set synlib_wait_for_design_license {DesignWare-Foundation}
 set OUT_DIR ./out
 set REP_DIR ./rep
 set RTL_DIR ../../src/rtl/
-set AREA_RPT $REP_DIR/rnl_area.rpt
-set TIME_RPT $REP_DIR/rnl_time.rpt
-set POWER_RPT $REP_DIR/rnl_power.rpt
+set AREA_RPT $REP_DIR/bitonic_area.rpt
+set TIME_RPT $REP_DIR/bitonic_time.rpt
+set POWER_RPT $REP_DIR/bitonic_power.rpt
 
-set top_mdl neuron_rnl_ptt
+set top_mdl bitonic_sort_32
 define_design_lib WORK -path "./work"
 
 # Small loop to read in several files
-set all_files {../../src/rtl/neuron_rnl_ptt.sv}
-
+set all_files {../../src/rtl/neuron_snl_grl.sv}
 foreach file $all_files {
  set module_source "$file"
  set both "{$module_source}"
  read_file -f sverilog $both
  analyze -format sverilog $both 
 }
+
 
 elaborate $top_mdl
 link
@@ -42,7 +42,7 @@ set_wire_load_model -name 5K_hvratio_1_1
 set_fix_multiple_port_nets -all -buffer_constants [get_designs *]
 
 #Specify clock constraints
-source ../../tcl/rnl_time.tcl
+#source ../../tcl/snl_time.tcl
 set_max_fanout 50 [get_designs $top_mdl]
 # Uniquify (optional) and compile
 check_design
@@ -82,6 +82,5 @@ redirect $AREA_RPT { report_area -hierarchy }
 #redirect $TIME_RPT { report_timing -path full -delay max -max_paths 1 -nworst 1 -true }
 redirect $TIME_RPT { report_timing -path full -delay_type max -max_paths 100 -nworst 100 }
 redirect $POWER_RPT { report_power }
-report_area -hierarchy > new_area.rpt
 exit
 

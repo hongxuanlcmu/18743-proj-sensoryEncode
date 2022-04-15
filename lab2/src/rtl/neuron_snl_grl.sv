@@ -82,26 +82,58 @@ module bitonic_sort_32 (sorted_out, raw_in);
     output [0:INPUT_SIZE-1] sorted_out;
 
     /* Declare any intermediate wires you use */
-    
+    localparam HALF_SIZE = INPUT_SIZE/2;
+    wire [0:HALF_SIZE-1] half_wires_0;
+    wire [0:HALF_SIZE-1] half_wires_1;
+    wire [0:INPUT_SIZE-1] inter_wires[N];
 
-    
+
+
     /* Instantiate two 16-input sorters here  */
-    
+    generate
+        if (N == 2) begin
+            bitonic_sort_2 halfSorter1
+                (half_wires_0, raw_in[0+:HALF_SIZE]);
+            bitonic_sort_2 halfSorter2
+                (half_wires_1, raw_in[(INPUT_SIZE-1)-:HALF_SIZE]);
+        end
+        else begin
+            bitonic_sort_32 #(N-1, 1<<(N-1)) halfSorter1
+                (half_wires_0, raw_in[0+:HALF_SIZE]);
+            bitonic_sort_32 #(N-1, 1<<(N-1)) halfSorter2
+                (half_wires_1, raw_in[(INPUT_SIZE-1)-:HALF_SIZE]);
+        end
+    endgenerate
+    assign inter_wires[0][0+:HALF_SIZE] = half_wires_0;
+    assign inter_wires[0][(INPUT_SIZE-1)-:HALF_SIZE] = {<<{half_wires_1}};
+
 
 
     /* WRITE YOUR CODE FOR THE LAST STAGE */
-    
+
     // Hint: Use generate loops and instantiate 2-input bitonic sorter inside.
     // Syntax example as below:
-    //      generate
-    //          for (i = 0; i < MAXVALUE; i = i + 1)
-    //          begin: loop1
-    //              for (j = 0; j < MAXVAL; j = j + 1)
-    //              begin: loop2
-    //
-    //              end
-    //          end
-    //      endgenerate
+    generate
+        for (i = 0; i < N; i = i + 1) begin: loop1
+            localparam STEP_SIZE = INPUT_SIZE >> (i + 1);
+            for (j = 0; j < (1 << i); j = j + 1) begin: loop2
+                for (k = 0; k < STEP_SIZE; k = k + 1) begin: loop3
+                    if (i == N - 1)
+                        bitonic_sort_2 last_step_sort
+                            ({sorted_out[k+j*STEP_SIZE*2],
+                              sorted_out[STEP_SIZE+k+j*STEP_SIZE*2]},
+                             {inter_wires[i][k+j*STEP_SIZE*2],
+                              inter_wires[i][STEP_SIZE+k+j*STEP_SIZE*2]});
+                    else
+                        bitonic_sort_2 last_step_sort
+                            ({inter_wires[i+1][k+j*STEP_SIZE*2],
+                              inter_wires[i+1][STEP_SIZE+k+j*STEP_SIZE*2]},
+                             {inter_wires[i][k+j*STEP_SIZE*2],
+                              inter_wires[i][STEP_SIZE+k+j*STEP_SIZE*2]});
+                end
+            end
+        end
+    endgenerate
 
     // Note that the output from the bottom 16-input sorter has to be sorted in descending order.
     // To enforce that, you can just reverse the indices when you take in input from the bottom 16-input sorter.
@@ -118,7 +150,8 @@ module bitonic_sort_2 (sorted_out, raw_in);
     output [0:1] sorted_out;
 
     /* WRITE YOUR CODE HERE */
-    
+    assign sorted_out[0] = raw_in[0] & raw_in[1];
+    assign sorted_out[1] = raw_in[0] | raw_in[1];
 
     /* YOUR CODE ENDS HERE */
 

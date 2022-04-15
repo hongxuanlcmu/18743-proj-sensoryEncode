@@ -244,10 +244,60 @@ module synapse (out, weight, input_spike, inc, dec, aclk, gclk, rst);
     output logic out;
     output logic [0:2] weight;
 
-    // INSERT CODE
+    logic out_latch;
+    logic tclk, tinc, tdec, is_weight_7, is_weight_0;
+    logic [2:0] case_bits;
+    logic [0:2] weight_next;
 
+    assign out = ~out_latch & input_spike;
 
-    // INSERT CODE
+    assign tclk = aclk & input_spike;
+    assign tinc = ~input_spike & inc;
+    assign tdec = ~input_spike & dec;
+    assign is_weight_0 = ~(weight[0] | weight[1] | weight[2]);
+    assign is_weight_7 = weight[0] & weight[1] & weight[2];
+
+    assign case_bits = {tinc, tdec, rst};
+
+    always_comb begin
+        casex (case_bits)
+            3'bxx1: weight_next = '0;
+            3'b100: begin
+                if (~is_weight_7)
+                    weight_next = weight + 3'b1;
+                else
+                    weight_next = weight;
+            end
+            3'b010: begin
+                if (~is_weight_0)
+                    weight_next = weight - 3'b1;
+                else
+                    weight_next = weight;
+            end
+            default: weight_next = weight;
+        endcase
+    end
+
+    always_ff @(posedge gclk, posedge is_weight_7) begin
+        if (gclk) begin
+            if (rst) begin
+                out_latch <= 1'b0;
+            end
+            out_latch <= input_spike & weight[0] & weight[1] & weight[2];
+        end
+        else begin
+            out_latch <= input_spike & weight[0] & weight[1] & weight[2];
+        end
+    end
+
+    always_ff @(posedge tclk, posedge gclk) begin
+        if (tclk) begin
+            weight <= weight - 3'b1;
+        end
+        else begin
+            weight <= weight_next;
+        end
+    end
 
 endmodule
 
