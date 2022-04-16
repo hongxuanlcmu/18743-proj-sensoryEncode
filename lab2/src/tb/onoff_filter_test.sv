@@ -43,8 +43,8 @@ module onoff_filter_test;
 
         //// Inputs begin ////
         // seed random
-        // _ = $urandom($system("exit $(($RANDOM % 255))"));
-        // for (int test = 0; test < 10; test = test + 1) begin
+        _ = $urandom($system("exit $(($RANDOM % 255))"));
+        for (int test = 0; test < 10000; test = test + 1) begin
             crtTestOnCenter = 1'b0;
             crtTestOffCenter = 1'b0;
             #1 rst = 0;
@@ -60,11 +60,11 @@ module onoff_filter_test;
             sorted_edges.rsort(); // edge pixel spike times sorted in decensending order
             expectOnCenter = 1'b0;
             expectOffCenter = 1'b0;
-            if (rand_time[8] < sorted_edges[4]) begin // onCenter
+            if (rand_time[8] <= sorted_edges[4]) begin // onCenter
                 expectOnCenter = 1'b1;
                 expectOnCenterTime = rand_time[8];
             end
-            if (rand_time[8] > sorted_edges[3]) begin // offCenter
+            if (rand_time[8] >= sorted_edges[3]) begin // offCenter
                 expectOffCenter = 1'b1;
                 expectOffCenterTime = sorted_edges[3];
             end
@@ -111,7 +111,7 @@ module onoff_filter_test;
                     end
                 end
             end
-        // end
+        end
         //// Inputs end ////
 
 
