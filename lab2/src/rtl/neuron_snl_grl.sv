@@ -1,4 +1,4 @@
-// Assumes 1->0 transitions as events or spikes
+// Assumes 0->1 transitions as events or spikes
 // Values are encoded as spiketimes
 // Weights are thermometer-coded. For e.g., 11111000 represnts a weight of 3, 11000000 represents 6 and so on
 // Models an edge temporal (GRL) neuron with step-no-leak response function
