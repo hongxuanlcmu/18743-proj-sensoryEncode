@@ -44,7 +44,7 @@ module onoff_filter_test;
         seed = $system("exit $(($RANDOM % 255))");
         _ = $urandom(seed);
         $display("Using rand seed: %d", seed);
-        for (int test = 0; test < 10000; test = test + 1) begin
+        for (int test = 0; test < 100000; test = test + 1) begin
             $display("Test number: %d", test);
             crtTestOnCenter = 1'b0;
             crtTestOffCenter = 1'b0;
