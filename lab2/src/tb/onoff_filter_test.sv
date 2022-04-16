@@ -21,6 +21,17 @@ module onoff_filter_test;
     int _;
     logic crtTestOnCenter;
     logic crtTestOffCenter;
+    int sorted_edges[8];
+    logic expectOnCenter;
+    logic expectOffCenter;
+    int expectOnCenterTime;
+    int expectOffCenterTime;
+
+    function printRandTime();
+        for (int i = 0; i < 9; i = i + 1) begin
+            $display("rand_time[%d] = %d", i, rand_time[i]);
+        end        
+    endfunction
 
     initial
     begin
@@ -41,9 +52,23 @@ module onoff_filter_test;
             #1 rst = 0;
             for (int i = 0; i < 9; i = i + 1) begin
                 rand_time[i] = $urandom_range(MAX_TIME);
-                $display("rand_time[%d] = %d", i, rand_time[i]);
+                // $display("rand_time[%d] = %d", i, rand_time[i]);
+                if (i < 8)
+                    sorted_edges[i] = rand_time[i];
             end
-            // TODO generate expected output and output time
+            // Generate expected output and output time
+            sorted_edges.rsort(); // edge pixel spike times sorted in decensending order
+            expectOnCenter = 1'b0;
+            expectOffCenter = 1'b0;
+            if (rand_time[8] < sorted_edges[4]) begin // onCenter
+                expectOnCenter = 1'b1;
+                expectOnCenterTime = rand_time[8];
+            end
+            if (rand_time[8] > sorted_edges[3]) begin // offCenter
+                expectOffCenter = 1'b1;
+                expectOffCenterTime = sorted_edges[3];
+            end
+
             #1
             for (int i = 0; i < MAX_TIME + LEAVEWAY; i = i + 1) begin
                 for (int j = 0; j < 9; j = j + 1) begin
@@ -62,12 +87,28 @@ module onoff_filter_test;
                 if (on_center_out == 1'b1 && !crtTestOnCenter) begin
                     crtTestOnCenter = 1'b1;
                     $display("time:%d, on center spike\n", i);
-                    // TODO test if this spike is as expected
+                    // Test if this spike is as expected
+                    if (!expectOnCenter) begin
+                        printRandTime();
+                        $fatal("ERROR: Should not be on center!\n");
+                    end
+                    else if (expectOnCenterTime != i) begin
+                        printRandTime();
+                        $fatal("ERROR: On center expected %d!\n", expectOnCenterTime);
+                    end
                 end
                 if (off_center_out == 1'b1 && !crtTestOffCenter) begin
                     crtTestOffCenter = 1'b1;
                     $display("time:%d, off center spike\n", i);
-                    // TODO test if this spike is as expected
+                    // Test if this spike is as expected
+                    if (!expectOffCenter) begin
+                        printRandTime();
+                        $fatal("ERROR: Should not be off center!\n");
+                    end
+                    else if (expectOffCenterTime != i) begin
+                        printRandTime();
+                        $fatal("ERROR: Off center expected %d!\n", expectOffCenterTime);
+                    end
                 end
             end
         // end
