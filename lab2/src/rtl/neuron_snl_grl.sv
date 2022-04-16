@@ -91,7 +91,9 @@ module onoff_filter_comp_center (filter_center_in, filter_edge_in, on_center_out
 
 endmodule
 
-// NOTE if a arrives before b, then y = a; otherwise y = 'z;
+// NOTE if a arrives before b, then y = a; otherwise y = 0;
+// a arrives before b: posedge a while b == 0
+// reset posedge at next gamma cycle
 module earlier_than (
     input logic a,
     input logic b,
