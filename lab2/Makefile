@@ -52,6 +52,20 @@ onoff-wave:
 		cd $(SIM)/onoff_filter && ./simv -gui;\
 	fi;
 
+
+.PHONY: onoff-synth
+onoff-synth:
+		
+	if [ ! -d "$(SYNTH)" ]; then \
+		mkdir $(SYNTH) && mkdir $(SYNTH)/onoff_filter;\
+		cd $(SYNTH)/onoff_filter && dc_shell -f $(CURDIR)/tcl/synth_onoff_filter.tcl;\
+	elif [ ! -d "$(SYNTH)/onoff_filter" ]; then \
+		mkdir $(SYNTH)/onoff_filter;\
+		cd $(SYNTH)/onoff_filter && dc_shell -f $(CURDIR)/tcl/synth_onoff_filter.tcl;\
+	else \
+		cd $(SYNTH)/onoff_filter && dc_shell -f $(CURDIR)/tcl/synth_onoff_filter.tcl;\
+	fi;
+
 .PHONY: bitonic-sim
 bitonic-sim:
 	

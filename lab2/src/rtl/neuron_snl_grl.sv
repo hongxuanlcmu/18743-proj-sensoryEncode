@@ -99,6 +99,7 @@ module earlier_than (
     input logic b,
     output logic y
 );
+    // b must be reset to 0 for a cycle at next gamma cycle to reset latch
     always_latch begin
         if(!b) y <= a;
     end
