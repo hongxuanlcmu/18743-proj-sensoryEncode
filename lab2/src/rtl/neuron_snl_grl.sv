@@ -93,12 +93,12 @@ module onoff_filter_comp_center (rst, filter_center_in, filter_edge_in, on_cente
 endmodule
 
 // NOTE if a arrives before b, then y = a; otherwise y = 'z;
-module earlier_than (rst, a, b, y);
-
-    input rst;
-    input a;
-    input b;
-    output y;
+module earlier_than (
+    input logic rst,
+    input logic a,
+    input logic b,
+    output logic y
+);
 
     enum logic [1:0] {idle, pass_a, inhibit} state_current, state_next;
 
