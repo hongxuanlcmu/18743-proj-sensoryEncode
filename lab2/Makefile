@@ -27,6 +27,31 @@ SYNTH := $(CURDIR)/SYNTH
 BACK := /afs/andrew/course/18/743/backend
 
 .SILENT:
+.PHONY: onoff-sim
+onoff-sim:
+	
+	if [ ! -d "$(SIM)" ]; then \
+        mkdir $(SIM) && mkdir $(SIM)/onoff_filter;\
+		cd $(SIM)/onoff_filter && vcs -sverilog -debug_all -full64 -top onff_filter_test $(SRC)/tb/onff_filter_test.sv $(SRC)/rtl/neuron_snl_grl.sv && ./simv;\
+	elif [ ! -d "$(SIM)/onoff_filter" ]; then \
+        mkdir $(SIM)/onoff_filter;\
+		cd $(SIM)/onoff_filter && vcs -sverilog -debug_all -full64 -top onff_filter_test $(SRC)/tb/onff_filter_test.sv $(SRC)/rtl/neuron_snl_grl.sv && ./simv;\
+	else \
+		cd $(SIM)/onoff_filter && vcs -sverilog -debug_all -full64 -top onff_filter_test $(SRC)/tb/onff_filter_test.sv $(SRC)/rtl/neuron_snl_grl.sv && ./simv;\
+	fi;
+	
+
+.PHONY: onoff-wave
+onoff-wave:
+	
+	if [ ! -d "$(SIM)" ]; then \
+        @echo "Perform simulation first";\
+	elif [ ! -d "$(SIM)/onoff_filter" ]; then \
+        @echo "Perform simulation first";\
+	else \
+		cd $(SIM)/onoff_filter && ./simv -gui;\
+	fi;
+
 .PHONY: bitonic-sim
 bitonic-sim:
 	
