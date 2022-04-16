@@ -104,22 +104,24 @@ module earlier_than (
 
     always_ff @(posedge rst, posedge a, posedge b) begin : updateStateCurrent
         state_current <= state_next;
+        if (rst)
+            state_current <= idle;
     end
 
     always_comb begin : genStateNext
         state_next = state_current;
         unique case (state_current)
             idle: begin
-                if (a == 1) begin
+                if (a) begin
                     state_next = pass_a;
                 end
-                else if (b == 1) begin
+                else if (b) begin
                     state_next = inhibit;
                 end
             end
             pass_a:
             inhibit: begin
-                if (rst == 1) begin
+                if (rst) begin
                     state_next = idle;
                 end
             end
@@ -128,17 +130,17 @@ module earlier_than (
     end
 
     always_comb begin : genY
-        y = 'z;
+        y = 1'b0;
         unique case (state_current)
             idle: begin
-                if (a == 1) begin
+                if (a) begin
                     y = a;
                 end
             end
             pass_a: begin
                 y = a;
-                if (rst == 1) begin
-                    y = 'z;
+                if (rst) begin
+                    y = 1'b0;
                 end
             end
             inhibit: ;

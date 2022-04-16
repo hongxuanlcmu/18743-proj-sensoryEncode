@@ -29,8 +29,8 @@ module onoff_filter_test;
 
         //// Inputs begin ////
         // seed random
-        _ = $urandom($system("exit $(($RANDOM % 255))"));
-        for (int test = 0; test < 10; test = test + 1) begin
+        // _ = $urandom($system("exit $(($RANDOM % 255))"));
+        // for (int test = 0; test < 10; test = test + 1) begin
             #1 rst = 0;
             #1 rst = 1;
             #1 rst = 0;
@@ -42,12 +42,12 @@ module onoff_filter_test;
                 #1
                 for (int j = 0; j < 9; j = j + 1) begin
                     if (j < 8) // edge pixels
-                        if (rand_time[j] < i)
+                        if ((MAX_TIME - rand_time[j]) > i)
                             filter_edge_in[j] = 1'b0;
                         else
                             filter_edge_in[j] = 1'b1;
                     else // center pixel
-                        if (rand_time[j] < i)
+                        if ((MAX_TIME - rand_time[j]) > i)
                             filter_center_in = 1'b0;
                         else
                             filter_center_in = 1'b1;
@@ -59,7 +59,7 @@ module onoff_filter_test;
                     $display("time:%d, off center spike\n", i);
                 end
             end
-        end
+        // end
         //// Inputs end ////
 
 

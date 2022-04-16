@@ -1,6 +1,6 @@
 # RTL ignores
-SIM/*
-SYNTH/*
+lab2/SIM/*
+lab2/SYNTH/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
