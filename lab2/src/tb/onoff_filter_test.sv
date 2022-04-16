@@ -2,14 +2,12 @@
 
 module onoff_filter_test;
 
-    reg rst;
     reg filter_center_in;
     reg [0:7] filter_edge_in;
     wire on_center_out;
     wire off_center_out;
 
     onoff_filter_comp_center DUT (
-        .rst(rst),
         .filter_center_in(filter_center_in),
         .filter_edge_in(filter_edge_in),
         .on_center_out(on_center_out),
@@ -26,7 +24,7 @@ module onoff_filter_test;
     logic expectOffCenter;
     int expectOnCenterTime;
     int expectOffCenterTime;
-
+    int seed;
     function printRandTime();
         for (int i = 0; i < 9; i = i + 1) begin
             $display("rand_time[%d] = %d", i, rand_time[i]);
@@ -43,13 +41,16 @@ module onoff_filter_test;
 
         //// Inputs begin ////
         // seed random
-        _ = $urandom($system("exit $(($RANDOM % 255))"));
+        seed = $system("exit $(($RANDOM % 255))");
+        _ = $urandom(seed);
+        $display("Using rand seed: %d", seed);
         for (int test = 0; test < 10000; test = test + 1) begin
+            $display("Test number: %d", test);
             crtTestOnCenter = 1'b0;
             crtTestOffCenter = 1'b0;
-            #1 rst = 0;
-            #1 rst = 1;
-            #1 rst = 0;
+            filter_edge_in = 0;
+            filter_center_in = 0;
+            #1
             for (int i = 0; i < 9; i = i + 1) begin
                 rand_time[i] = $urandom_range(MAX_TIME);
                 // $display("rand_time[%d] = %d", i, rand_time[i]);
@@ -86,7 +87,7 @@ module onoff_filter_test;
                 #1
                 if (on_center_out == 1'b1 && !crtTestOnCenter) begin
                     crtTestOnCenter = 1'b1;
-                    $display("time:%d, on center spike\n", i);
+                    $display("time:%d, on center spike", i);
                     // Test if this spike is as expected
                     if (!expectOnCenter) begin
                         printRandTime();
@@ -99,7 +100,7 @@ module onoff_filter_test;
                 end
                 if (off_center_out == 1'b1 && !crtTestOffCenter) begin
                     crtTestOffCenter = 1'b1;
-                    $display("time:%d, off center spike\n", i);
+                    $display("time:%d, off center spike", i);
                     // Test if this spike is as expected
                     if (!expectOffCenter) begin
                         printRandTime();

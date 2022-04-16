@@ -72,9 +72,8 @@ module neuron_snl_grl (output_spike, input_spikes, input_weights);
 
 endmodule
 
-module onoff_filter_comp_center (rst, filter_center_in, filter_edge_in, on_center_out, off_center_out);
+module onoff_filter_comp_center (filter_center_in, filter_edge_in, on_center_out, off_center_out);
 
-    input rst;
     input filter_center_in;
     input [0:7] filter_edge_in;
     output on_center_out;
@@ -85,67 +84,21 @@ module onoff_filter_comp_center (rst, filter_center_in, filter_edge_in, on_cente
     bitonic_sort_32 #(.N(3)) edgeSort8 (.sorted_out(sorted_edges), .raw_in(filter_edge_in));
 
     // For on center, if filter_center_in earlier than sorted_edges[4], pass filter_center_in, else inhibit
-    earlier_than isOnCenter (.rst(rst), .a(filter_center_in), .b(sorted_edges[4]), .y(on_center_out));
+    earlier_than isOnCenter (.a(filter_center_in), .b(sorted_edges[4]), .y(on_center_out));
 
     // For off center, if filter_center_in later than sorted_edges[3], pass sorted_edges[3], else inhibit
-    earlier_than isOffCenter (.rst(rst), .a(sorted_edges[3]), .b(filter_center_in), .y(off_center_out));
+    earlier_than isOffCenter (.a(sorted_edges[3]), .b(filter_center_in), .y(off_center_out));
 
 endmodule
 
 // NOTE if a arrives before b, then y = a; otherwise y = 'z;
 module earlier_than (
-    input logic rst,
     input logic a,
     input logic b,
     output logic y
 );
-
-    enum logic [1:0] {idle, pass_a, inhibit} state_current, state_next;
-
-    always_ff @(posedge rst, posedge a, posedge b) begin : updateStateCurrent
-        state_current <= state_next;
-        if (rst)
-            state_current <= idle;
-    end
-
-    always_comb begin : genStateNext
-        state_next = state_current;
-        unique case (state_current)
-            idle: begin
-                if (a) begin
-                    state_next = pass_a;
-                end
-                else if (b) begin
-                    state_next = inhibit;
-                end
-            end
-            pass_a:
-            inhibit: begin
-                if (rst) begin
-                    state_next = idle;
-                end
-            end
-            default: ;
-        endcase
-    end
-
-    always_comb begin : genY
-        y = 1'b0;
-        unique case (state_current)
-            idle: begin
-                if (a) begin
-                    y = a;
-                end
-            end
-            pass_a: begin
-                y = a;
-                if (rst) begin
-                    y = 1'b0;
-                end
-            end
-            inhibit: ;
-            default: ;
-        endcase
+    always_latch begin
+        if(!b) y <= a;
     end
 
 endmodule
