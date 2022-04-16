@@ -141,7 +141,7 @@ module earlier_than (rst, a, b, y);
                     y = 'z;
                 end
             end
-            inhibit:
+            inhibit: ;
             default: ;
         endcase
     end
