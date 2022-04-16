@@ -32,12 +32,12 @@ onoff-sim:
 	
 	if [ ! -d "$(SIM)" ]; then \
         mkdir $(SIM) && mkdir $(SIM)/onoff_filter;\
-		cd $(SIM)/onoff_filter && vcs -sverilog -debug_all -full64 -top onff_filter_test $(SRC)/tb/onff_filter_test.sv $(SRC)/rtl/neuron_snl_grl.sv && ./simv;\
+		cd $(SIM)/onoff_filter && vcs -sverilog -debug_all -full64 -top onoff_filter_test $(SRC)/tb/onoff_filter_test.sv $(SRC)/rtl/neuron_snl_grl.sv && ./simv;\
 	elif [ ! -d "$(SIM)/onoff_filter" ]; then \
         mkdir $(SIM)/onoff_filter;\
-		cd $(SIM)/onoff_filter && vcs -sverilog -debug_all -full64 -top onff_filter_test $(SRC)/tb/onff_filter_test.sv $(SRC)/rtl/neuron_snl_grl.sv && ./simv;\
+		cd $(SIM)/onoff_filter && vcs -sverilog -debug_all -full64 -top onoff_filter_test $(SRC)/tb/onoff_filter_test.sv $(SRC)/rtl/neuron_snl_grl.sv && ./simv;\
 	else \
-		cd $(SIM)/onoff_filter && vcs -sverilog -debug_all -full64 -top onff_filter_test $(SRC)/tb/onff_filter_test.sv $(SRC)/rtl/neuron_snl_grl.sv && ./simv;\
+		cd $(SIM)/onoff_filter && vcs -sverilog -debug_all -full64 -top onoff_filter_test $(SRC)/tb/onoff_filter_test.sv $(SRC)/rtl/neuron_snl_grl.sv && ./simv;\
 	fi;
 	
 
