@@ -93,20 +93,18 @@ class OnOffCenterFilter(nn.Module):
         
     def __call__(self, data):
         sliced_data = data.unfold(0, self.rfsize[0], self.stride).unfold(1, self.rfsize[1],self.stride).squeeze() #26x26x3x3 
-        rowIndices = torch.arange(self.rows).unsqueeze(1).repeat(1,self.cols).to(self.device)
-        columnIndices = torch.arange(self.cols).repeat(self.rows).reshape(self.rows, self.cols).to(self.device)
-        #filterIndices = torch.arange(self.rfsize[0])
-        #EdgeBrighterThanCenter = torch.ones(self.rows, self.cols,self.rfsize[0], self.rfsize[1])
-        centerValues = sliced_data[rowIndices,columnIndices,1,1].unsqueeze(2).unsqueeze(3).repeat(1,1,3,3)
-        EdgeBrighterThanCenter = sliced_data < centerValues
-        CenterBrighterThanEdge = sliced_data > centerValues
-        EdgeBrighterThanCenter_cnt = torch.sum(EdgeBrighterThanCenter, [2,3])
-        CenterBrighterThanEdge_cnt = torch.sum(CenterBrighterThanEdge, [2,3])
-        maxGamma = torch.ones(self.rows,self.cols).to(self.device) * self.gamma
-        onCenterSpike = maxGamma - CenterBrighterThanEdge_cnt
-        offCenterSpike = maxGamma - EdgeBrighterThanCenter_cnt
-        onCenterSpike[onCenterSpike >= self.spikeThre] = float('Inf')
-        offCenterSpike[offCenterSpike >= self.spikeThre] = float('Inf')
+        flattened_data = torch.reshape(sliced_data, (26,26,9)) #26x26x9
+        centerValues = flattened_data[:,:,4]
+        edgeValues = torch.concat((flattened_data[:,:,:4],flattened_data[:,:,5:]),2)
+        sorted_data, sorted_indices = torch.sort(edgeValues,dim=2,descending=True)
+
+        isOnCenter = centerValues <= sorted_data[:,:,3] # if true, fill with centerValues, else inf
+        isOffCenter = sorted_data[:,:,4] <= centerValues # if true, fill with sorted_data[3], else inf
+
+        onCenterSpike = torch.ones(self.rows,self.cols).to(self.device) * float("Inf")
+        onCenterSpike[isOnCenter] = centerValues[isOnCenter]
+        offCenterSpike = torch.ones(self.rows,self.cols).to(self.device) * float("Inf")
+        offCenterSpike[isOffCenter] = (sorted_data[:,:,4])[isOffCenter]
         onCenterSpike = onCenterSpike.unsqueeze(2)
         offCenterSpike = offCenterSpike.unsqueeze(2)
         encoded = torch.cat([onCenterSpike, offCenterSpike], dim=2)
