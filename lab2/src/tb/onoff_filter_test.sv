@@ -2,12 +2,23 @@
 
 module onoff_filter_test;
 
+    parameter FILTER_WIDTH = 3; // FIXME cannot pass 5
+    parameter SORTER_WIDTH = 3;
+    localparam NUM_FILTER_PIXELS = FILTER_WIDTH**2;
+    localparam NUM_EDGE_PIXELS = NUM_FILTER_PIXELS - 1;
+    localparam NUM_SORTER_BITS = 2**SORTER_WIDTH;
+    localparam NUM_PAD_BITS = NUM_SORTER_BITS - NUM_EDGE_PIXELS;
+    localparam NUM_EDGE_PIXELS_HALF = NUM_EDGE_PIXELS / 2;
+
     reg filter_center_in;
-    reg [0:7] filter_edge_in;
+    reg [0:NUM_EDGE_PIXELS-1] filter_edge_in;
     wire on_center_out;
     wire off_center_out;
 
-    onoff_filter_comp_center DUT (
+    onoff_filter_comp_center #(
+        .FILTER_WIDTH(FILTER_WIDTH),
+        .SORTER_WIDTH(SORTER_WIDTH)
+    ) DUT (
         .filter_center_in(filter_center_in),
         .filter_edge_in(filter_edge_in),
         .on_center_out(on_center_out),
@@ -15,18 +26,18 @@ module onoff_filter_test;
 
     parameter MAX_TIME = 64;
     parameter LEAVEWAY = 5;
-    int rand_time[9]; // spike time for the 9 pixels in of the filter
+    int rand_time[NUM_FILTER_PIXELS]; // spike time for the 9 pixels in of the filter
     int _;
     logic crtTestOnCenter;
     logic crtTestOffCenter;
-    int sorted_edges[8];
+    int sorted_edges[NUM_EDGE_PIXELS];
     logic expectOnCenter;
     logic expectOffCenter;
     int expectOnCenterTime;
     int expectOffCenterTime;
     int seed;
     function printRandTime();
-        for (int i = 0; i < 9; i = i + 1) begin
+        for (int i = 0; i < NUM_FILTER_PIXELS; i = i + 1) begin
             $display("rand_time[%d] = %d", i, rand_time[i]);
         end        
     endfunction
@@ -51,29 +62,31 @@ module onoff_filter_test;
             filter_edge_in = 0;
             filter_center_in = 0;
             #1
-            for (int i = 0; i < 9; i = i + 1) begin
+            for (int i = 0; i < NUM_FILTER_PIXELS; i = i + 1) begin
                 rand_time[i] = $urandom_range(MAX_TIME);
                 // $display("rand_time[%d] = %d", i, rand_time[i]);
-                if (i < 8)
+                if (i < NUM_EDGE_PIXELS)
                     sorted_edges[i] = rand_time[i];
             end
             // Generate expected output and output time
             sorted_edges.rsort(); // edge pixel spike times sorted in decensending order
             expectOnCenter = 1'b0;
             expectOffCenter = 1'b0;
-            if (rand_time[8] <= sorted_edges[4]) begin // onCenter
+            // earlier than half
+            if (rand_time[NUM_FILTER_PIXELS-1] <= sorted_edges[NUM_EDGE_PIXELS/2 - 1]) begin // onCenter
                 expectOnCenter = 1'b1;
-                expectOnCenterTime = rand_time[8];
+                expectOnCenterTime = rand_time[NUM_FILTER_PIXELS-1];
             end
-            if (rand_time[8] >= sorted_edges[3]) begin // offCenter
+            // later than half
+            if (rand_time[NUM_FILTER_PIXELS-1] >= sorted_edges[NUM_EDGE_PIXELS/2]) begin // offCenter
                 expectOffCenter = 1'b1;
-                expectOffCenterTime = sorted_edges[3];
+                expectOffCenterTime = sorted_edges[NUM_EDGE_PIXELS/2];
             end
 
             #1
             for (int i = 0; i < MAX_TIME + LEAVEWAY; i = i + 1) begin
-                for (int j = 0; j < 9; j = j + 1) begin
-                    if (j < 8) // edge pixels
+                for (int j = 0; j < NUM_FILTER_PIXELS; j = j + 1) begin
+                    if (j < NUM_EDGE_PIXELS) // edge pixels
                         if (i < rand_time[j])
                             filter_edge_in[j] = 1'b0;
                         else
