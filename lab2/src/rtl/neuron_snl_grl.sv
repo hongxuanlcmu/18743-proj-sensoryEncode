@@ -86,7 +86,7 @@ module onoff_filter_comp_center (filter_center_in, filter_edge_in, on_center_out
     output on_center_out;
     output off_center_out;
 
-    logic [0:NUM_EDGE_PIXELS - 1] sorted_edges;
+    logic [0:NUM_SORTER_BITS - 1] sorted_edges;
 
 // 0 1 2 3 4 5 6 7
 // 7 6 5 4 3 2 1 0
