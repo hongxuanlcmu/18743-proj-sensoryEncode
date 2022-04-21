@@ -1,0 +1,92 @@
+ 
+****************************************
+Report : area
+Design : onoff_filter_comp_center
+Version: P-2019.03
+Date   : Thu Apr 21 00:04:08 2022
+****************************************
+
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /afs/andrew.cmu.edu/course/18/743/backend/45nm_Nangate/pdk_v1.3_v2010_12/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Liberty/NLDM/NangateOpenCellLibrary_typical.db)
+
+Number of ports:                          137
+Number of nets:                           195
+Number of cells:                           99
+Number of combinational cells:             70
+Number of sequential cells:                 2
+Number of macros/black boxes:               0
+Number of buf/inv:                         32
+Number of references:                       3
+
+Combinational area:                 48.944000
+Buf/Inv area:                       17.024000
+Noncombinational area:               5.320000
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                    54.264000
+Total area:                 undefined
+
+Hierarchical area distribution
+------------------------------
+
+                                  Global cell area          Local cell area
+                                  ------------------  --------------------------- 
+Hierarchical cell                 Absolute   Percent  Combi-    Noncombi-  Black-
+                                  Total      Total    national  national   boxes   Design
+--------------------------------  ---------  -------  --------  ---------  ------  --------------------------------
+onoff_filter_comp_center            54.2640    100.0    0.0000     0.0000  0.0000  onoff_filter_comp_center
+edgeSort8                           48.9440     90.2    0.0000     0.0000  0.0000  bitonic_sort_32_N3
+edgeSort8/genblk1_halfSorter1       15.9600     29.4    0.0000     0.0000  0.0000  bitonic_sort_32_N2_INPUT_SIZE4_1
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_11
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_10
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_9
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_8
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_7
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_6
+edgeSort8/genblk1_halfSorter2       15.9600     29.4    0.0000     0.0000  0.0000  bitonic_sort_32_N2_INPUT_SIZE4_0
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_5
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter2
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_4
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_3
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_2
+edgeSort8/genblk1_halfSorter2/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_1
+edgeSort8/genblk1_halfSorter2/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_0
+edgeSort8/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_23
+edgeSort8/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_22
+edgeSort8/loop1_0__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_21
+edgeSort8/loop1_0__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      4.9    2.6600     0.0000  0.0000  bitonic_sort_2_20
+edgeSort8/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     1.0640      2.0    1.0640     0.0000  0.0000  bitonic_sort_2_19
+edgeSort8/loop1_1__loop2_0__loop3_1__genblk1_last_step_sort
+                                     1.0640      2.0    1.0640     0.0000  0.0000  bitonic_sort_2_18
+edgeSort8/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     1.0640      2.0    1.0640     0.0000  0.0000  bitonic_sort_2_17
+edgeSort8/loop1_1__loop2_1__loop3_1__genblk1_last_step_sort
+                                     1.0640      2.0    1.0640     0.0000  0.0000  bitonic_sort_2_16
+edgeSort8/loop1_2__loop2_1__loop3_0__genblk1_last_step_sort
+                                     1.0640      2.0    1.0640     0.0000  0.0000  bitonic_sort_2_14
+edgeSort8/loop1_2__loop2_2__loop3_0__genblk1_last_step_sort
+                                     1.0640      2.0    1.0640     0.0000  0.0000  bitonic_sort_2_13
+isOffCenter                          2.6600      4.9    0.0000     2.6600  0.0000  earlier_than_0
+isOnCenter                           2.6600      4.9    0.0000     2.6600  0.0000  earlier_than_1
+--------------------------------  ---------  -------  --------  ---------  ------  --------------------------------
+Total                                                  48.9440     5.3200  0.0000
+
+1
