@@ -1,0 +1,966 @@
+ 
+****************************************
+Report : area
+Design : onoff_filter_comp_center
+Version: P-2019.03
+Date   : Thu Apr 21 00:29:34 2022
+****************************************
+
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /afs/andrew.cmu.edu/course/18/743/backend/45nm_Nangate/pdk_v1.3_v2010_12/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Liberty/NLDM/NangateOpenCellLibrary_typical.db)
+
+Number of ports:                         2353
+Number of nets:                          3638
+Number of cells:                         1971
+Number of combinational cells:           1502
+Number of sequential cells:                 2
+Number of macros/black boxes:               0
+Number of buf/inv:                        736
+Number of references:                       3
+
+Combinational area:               1019.311988
+Buf/Inv area:                      395.808003
+Noncombinational area:               5.320000
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                  1024.631988
+Total area:                 undefined
+
+Hierarchical area distribution
+------------------------------
+
+                                  Global cell area          Local cell area
+                                  ------------------  ---------------------------- 
+Hierarchical cell                 Absolute   Percent  Combi-     Noncombi-  Black-
+                                  Total      Total    national   national   boxes   Design
+--------------------------------  ---------  -------  ---------  ---------  ------  ---------------------------------
+onoff_filter_comp_center          1024.6320    100.0     0.0000     0.0000  0.0000  onoff_filter_comp_center
+edgeSort8                         1019.3120     99.5     0.0000     0.0000  0.0000  bitonic_sort_32_N6
+edgeSort8/genblk1_halfSorter1      638.4000     62.3     0.0000     0.0000  0.0000  bitonic_sort_32_N5_INPUT_SIZE32_1
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1
+                                   212.8000     20.8     0.0000     0.0000  0.0000  bitonic_sort_32_N4_INPUT_SIZE16_3
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1
+                                    63.8400      6.2     0.0000     0.0000  0.0000  bitonic_sort_32_N3_INPUT_SIZE8_7
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1
+                                    15.9600      1.6     0.0000     0.0000  0.0000  bitonic_sort_32_N2_INPUT_SIZE4_15
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_95
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_94
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_93
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_92
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_91
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_90
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2
+                                    15.9600      1.6     0.0000     0.0000  0.0000  bitonic_sort_32_N2_INPUT_SIZE4_14
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_89
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_88
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_87
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_86
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_85
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_84
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_191
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_190
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_189
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_188
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_187
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_186
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_185
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_184
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_183
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_182
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_181
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_180
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2
+                                    63.8400      6.2     0.0000     0.0000  0.0000  bitonic_sort_32_N3_INPUT_SIZE8_6
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1
+                                    15.9600      1.6     0.0000     0.0000  0.0000  bitonic_sort_32_N2_INPUT_SIZE4_13
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_83
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_82
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_81
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_80
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_79
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_78
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2
+                                    15.9600      1.6     0.0000     0.0000  0.0000  bitonic_sort_32_N2_INPUT_SIZE4_12
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter1
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_77
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter2
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_76
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_75
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_74
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_73
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_72
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_179
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_178
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_177
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_176
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_175
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_174
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_173
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_172
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_171
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_170
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_169
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_168
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_319
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_318
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_317
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_316
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_4__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_315
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_5__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_314
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_6__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_313
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_7__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_312
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_311
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_310
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_309
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_308
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_307
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_306
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_1__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_305
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_1__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_304
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_303
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_302
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_301
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_300
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_299
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_2__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_298
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_297
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_3__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_296
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_3__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_295
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_3__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_294
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_3__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_293
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_3__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_292
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_3__loop2_4__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_291
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_3__loop2_5__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_290
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_3__loop2_6__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_289
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter1/loop1_3__loop2_7__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_288
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2
+                                   212.8000     20.8     0.0000     0.0000  0.0000  bitonic_sort_32_N4_INPUT_SIZE16_2
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1
+                                    63.8400      6.2     0.0000     0.0000  0.0000  bitonic_sort_32_N3_INPUT_SIZE8_5
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1
+                                    15.9600      1.6     0.0000     0.0000  0.0000  bitonic_sort_32_N2_INPUT_SIZE4_11
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_71
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_70
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_69
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_68
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_67
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_66
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2
+                                    15.9600      1.6     0.0000     0.0000  0.0000  bitonic_sort_32_N2_INPUT_SIZE4_10
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_65
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_64
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_63
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_62
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_61
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_60
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_167
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_166
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_165
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_164
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_163
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_162
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_161
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_160
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_2__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_159
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_2__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_158
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_2__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_157
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_2__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_156
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2
+                                    63.8400      6.2     0.0000     0.0000  0.0000  bitonic_sort_32_N3_INPUT_SIZE8_4
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter1
+                                    15.9600      1.6     0.0000     0.0000  0.0000  bitonic_sort_32_N2_INPUT_SIZE4_9
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_59
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_58
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_57
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_56
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_55
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_54
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter2
+                                    15.9600      1.6     0.0000     0.0000  0.0000  bitonic_sort_32_N2_INPUT_SIZE4_8
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter1
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_53
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter2
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_52
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter2/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_51
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter2/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_50
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter2/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_49
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter2/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_48
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_155
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_154
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_0__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_153
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_0__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_152
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_151
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_1__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_150
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_149
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_1__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_148
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_2__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_147
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_2__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_146
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_2__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_145
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_2__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_144
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_287
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_286
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_285
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_284
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_4__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_283
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_5__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_282
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_6__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_281
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_7__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_280
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_279
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_278
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_277
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_276
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_275
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_274
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_1__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_273
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_1__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_272
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_271
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_270
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_269
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_268
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_267
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_2__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_266
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_265
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_3__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_264
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_3__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_263
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_3__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_262
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_3__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_261
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_3__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_260
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_3__loop2_4__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_259
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_3__loop2_5__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_258
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_3__loop2_6__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_257
+edgeSort8/genblk1_halfSorter1/genblk1_halfSorter2/loop1_3__loop2_7__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_256
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_479
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_10__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_469
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_11__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_468
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_12__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_467
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_13__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_466
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_14__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_465
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_15__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_464
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_478
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_477
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_476
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_4__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_475
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_5__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_474
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_6__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_473
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_7__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_472
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_8__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_471
+edgeSort8/genblk1_halfSorter1/loop1_0__loop2_0__loop3_9__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_470
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_463
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_462
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_461
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_460
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_0__loop3_4__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_459
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_0__loop3_5__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_458
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_0__loop3_6__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_457
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_0__loop3_7__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_456
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_455
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_454
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_1__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_453
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_1__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_452
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_1__loop3_4__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_451
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_1__loop3_5__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_450
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_1__loop3_6__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_449
+edgeSort8/genblk1_halfSorter1/loop1_1__loop2_1__loop3_7__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_448
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_447
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_446
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_445
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_444
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_443
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_442
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_1__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_441
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_1__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_440
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_439
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_2__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_438
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_2__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_437
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_2__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_436
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_435
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_3__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_434
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_3__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_433
+edgeSort8/genblk1_halfSorter1/loop1_2__loop2_3__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_432
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_431
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_430
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_429
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_428
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_427
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_2__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_426
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_425
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_3__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_424
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_4__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_423
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_4__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_422
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_5__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_421
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_5__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_420
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_6__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_419
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_6__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_418
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_7__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_417
+edgeSort8/genblk1_halfSorter1/loop1_3__loop2_7__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_416
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_415
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_10__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_405
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_11__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_404
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_12__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_403
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_13__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_402
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_14__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_401
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_15__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_400
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_414
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_413
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_412
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_4__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_411
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_5__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_410
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_6__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_409
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_7__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_408
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_8__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_407
+edgeSort8/genblk1_halfSorter1/loop1_4__loop2_9__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_406
+edgeSort8/genblk1_halfSorter2      297.9200     29.1     0.0000     0.0000  0.0000  bitonic_sort_32_N5_INPUT_SIZE32_0
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1
+                                   212.8000     20.8     0.0000     0.0000  0.0000  bitonic_sort_32_N4_INPUT_SIZE16_1
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1
+                                    63.8400      6.2     0.0000     0.0000  0.0000  bitonic_sort_32_N3_INPUT_SIZE8_3
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1
+                                    15.9600      1.6     0.0000     0.0000  0.0000  bitonic_sort_32_N2_INPUT_SIZE4_7
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_47
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_46
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_45
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_44
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_43
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_42
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2
+                                    15.9600      1.6     0.0000     0.0000  0.0000  bitonic_sort_32_N2_INPUT_SIZE4_6
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_41
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_40
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_39
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_38
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_37
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_36
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_143
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_142
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_141
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_0__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_140
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_139
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_138
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_137
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_1__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_136
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_135
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_134
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_133
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1/loop1_2__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_132
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2
+                                    63.8400      6.2     0.0000     0.0000  0.0000  bitonic_sort_32_N3_INPUT_SIZE8_2
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1
+                                    15.9600      1.6     0.0000     0.0000  0.0000  bitonic_sort_32_N2_INPUT_SIZE4_5
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter1
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_35
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_34
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_33
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_32
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_31
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_30
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2
+                                    15.9600      1.6     0.0000     0.0000  0.0000  bitonic_sort_32_N2_INPUT_SIZE4_4
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter1
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_29
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/genblk1_halfSorter2
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_28
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_27
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_26
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_25
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/genblk1_halfSorter2/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_24
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_131
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_130
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_129
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_0__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_128
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_127
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_126
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_125
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_1__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_124
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_123
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_122
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_121
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/genblk1_halfSorter2/loop1_2__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_120
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_255
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_254
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_253
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_252
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_4__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_251
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_5__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_250
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_6__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_249
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_0__loop2_0__loop3_7__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_248
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_247
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_246
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_0__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_245
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_0__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_244
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_243
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_242
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_1__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_241
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_1__loop2_1__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_240
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_2__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_239
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_2__loop2_0__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_238
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_2__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_237
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_2__loop2_1__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_236
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_2__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_235
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_2__loop2_2__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_234
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_2__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_233
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_2__loop2_3__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_232
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_3__loop2_0__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_231
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_3__loop2_1__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_230
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_3__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_229
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_3__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_228
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_3__loop2_4__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_227
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_3__loop2_5__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_226
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_3__loop2_6__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_225
+edgeSort8/genblk1_halfSorter2/genblk1_halfSorter1/loop1_3__loop2_7__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_224
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_399
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_10__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_389
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_11__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_388
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_12__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_387
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_13__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_386
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_14__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_385
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_15__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_384
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_398
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_2__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_397
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_3__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_396
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_4__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_395
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_5__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_394
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_6__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_393
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_7__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_392
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_8__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_391
+edgeSort8/genblk1_halfSorter2/loop1_0__loop2_0__loop3_9__genblk1_last_step_sort
+                                     0.5320      0.1     0.5320     0.0000  0.0000  bitonic_sort_2_390
+edgeSort8/genblk1_halfSorter2/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     1.5960      0.2     1.5960     0.0000  0.0000  bitonic_sort_2_375
+edgeSort8/genblk1_halfSorter2/loop1_1__loop2_1__loop3_1__genblk1_last_step_sort
+                                     1.5960      0.2     1.5960     0.0000  0.0000  bitonic_sort_2_374
+edgeSort8/genblk1_halfSorter2/loop1_1__loop2_1__loop3_2__genblk1_last_step_sort
+                                     1.5960      0.2     1.5960     0.0000  0.0000  bitonic_sort_2_373
+edgeSort8/genblk1_halfSorter2/loop1_1__loop2_1__loop3_3__genblk1_last_step_sort
+                                     1.5960      0.2     1.5960     0.0000  0.0000  bitonic_sort_2_372
+edgeSort8/genblk1_halfSorter2/loop1_1__loop2_1__loop3_4__genblk1_last_step_sort
+                                     1.5960      0.2     1.5960     0.0000  0.0000  bitonic_sort_2_371
+edgeSort8/genblk1_halfSorter2/loop1_1__loop2_1__loop3_5__genblk1_last_step_sort
+                                     1.5960      0.2     1.5960     0.0000  0.0000  bitonic_sort_2_370
+edgeSort8/genblk1_halfSorter2/loop1_1__loop2_1__loop3_6__genblk1_last_step_sort
+                                     1.5960      0.2     1.5960     0.0000  0.0000  bitonic_sort_2_369
+edgeSort8/genblk1_halfSorter2/loop1_1__loop2_1__loop3_7__genblk1_last_step_sort
+                                     1.5960      0.2     1.5960     0.0000  0.0000  bitonic_sort_2_368
+edgeSort8/genblk1_halfSorter2/loop1_2__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_359
+edgeSort8/genblk1_halfSorter2/loop1_2__loop2_2__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_358
+edgeSort8/genblk1_halfSorter2/loop1_2__loop2_2__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_357
+edgeSort8/genblk1_halfSorter2/loop1_2__loop2_2__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_356
+edgeSort8/genblk1_halfSorter2/loop1_2__loop2_3__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_355
+edgeSort8/genblk1_halfSorter2/loop1_2__loop2_3__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_354
+edgeSort8/genblk1_halfSorter2/loop1_2__loop2_3__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_353
+edgeSort8/genblk1_halfSorter2/loop1_2__loop2_3__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_352
+edgeSort8/genblk1_halfSorter2/loop1_3__loop2_4__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_343
+edgeSort8/genblk1_halfSorter2/loop1_3__loop2_4__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_342
+edgeSort8/genblk1_halfSorter2/loop1_3__loop2_5__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_341
+edgeSort8/genblk1_halfSorter2/loop1_3__loop2_5__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_340
+edgeSort8/genblk1_halfSorter2/loop1_3__loop2_6__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_339
+edgeSort8/genblk1_halfSorter2/loop1_3__loop2_6__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_338
+edgeSort8/genblk1_halfSorter2/loop1_3__loop2_7__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_337
+edgeSort8/genblk1_halfSorter2/loop1_3__loop2_7__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_336
+edgeSort8/genblk1_halfSorter2/loop1_4__loop2_10__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_325
+edgeSort8/genblk1_halfSorter2/loop1_4__loop2_11__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_324
+edgeSort8/genblk1_halfSorter2/loop1_4__loop2_12__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_323
+edgeSort8/genblk1_halfSorter2/loop1_4__loop2_13__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_322
+edgeSort8/genblk1_halfSorter2/loop1_4__loop2_14__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_321
+edgeSort8/genblk1_halfSorter2/loop1_4__loop2_15__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_320
+edgeSort8/genblk1_halfSorter2/loop1_4__loop2_8__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_327
+edgeSort8/genblk1_halfSorter2/loop1_4__loop2_9__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_326
+edgeSort8/loop1_0__loop2_0__loop3_0__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_671
+edgeSort8/loop1_0__loop2_0__loop3_10__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_661
+edgeSort8/loop1_0__loop2_0__loop3_11__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_660
+edgeSort8/loop1_0__loop2_0__loop3_12__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_659
+edgeSort8/loop1_0__loop2_0__loop3_13__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_658
+edgeSort8/loop1_0__loop2_0__loop3_14__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_657
+edgeSort8/loop1_0__loop2_0__loop3_15__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_656
+edgeSort8/loop1_0__loop2_0__loop3_16__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_655
+edgeSort8/loop1_0__loop2_0__loop3_17__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_654
+edgeSort8/loop1_0__loop2_0__loop3_18__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_653
+edgeSort8/loop1_0__loop2_0__loop3_19__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_652
+edgeSort8/loop1_0__loop2_0__loop3_1__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_670
+edgeSort8/loop1_0__loop2_0__loop3_20__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_651
+edgeSort8/loop1_0__loop2_0__loop3_21__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_650
+edgeSort8/loop1_0__loop2_0__loop3_22__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_649
+edgeSort8/loop1_0__loop2_0__loop3_23__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_648
+edgeSort8/loop1_0__loop2_0__loop3_24__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_647
+edgeSort8/loop1_0__loop2_0__loop3_25__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_646
+edgeSort8/loop1_0__loop2_0__loop3_26__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_645
+edgeSort8/loop1_0__loop2_0__loop3_27__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_644
+edgeSort8/loop1_0__loop2_0__loop3_28__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_643
+edgeSort8/loop1_0__loop2_0__loop3_29__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_642
+edgeSort8/loop1_0__loop2_0__loop3_2__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_669
+edgeSort8/loop1_0__loop2_0__loop3_30__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_641
+edgeSort8/loop1_0__loop2_0__loop3_31__genblk1_last_step_sort
+                                     0.7980      0.1     0.7980     0.0000  0.0000  bitonic_sort_2_640
+edgeSort8/loop1_0__loop2_0__loop3_3__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_668
+edgeSort8/loop1_0__loop2_0__loop3_4__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_667
+edgeSort8/loop1_0__loop2_0__loop3_5__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_666
+edgeSort8/loop1_0__loop2_0__loop3_6__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_665
+edgeSort8/loop1_0__loop2_0__loop3_7__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_664
+edgeSort8/loop1_0__loop2_0__loop3_8__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_663
+edgeSort8/loop1_0__loop2_0__loop3_9__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_662
+edgeSort8/loop1_1__loop2_1__loop3_0__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_623
+edgeSort8/loop1_1__loop2_1__loop3_10__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_613
+edgeSort8/loop1_1__loop2_1__loop3_11__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_612
+edgeSort8/loop1_1__loop2_1__loop3_12__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_611
+edgeSort8/loop1_1__loop2_1__loop3_13__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_610
+edgeSort8/loop1_1__loop2_1__loop3_14__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_609
+edgeSort8/loop1_1__loop2_1__loop3_15__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_608
+edgeSort8/loop1_1__loop2_1__loop3_1__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_622
+edgeSort8/loop1_1__loop2_1__loop3_2__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_621
+edgeSort8/loop1_1__loop2_1__loop3_3__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_620
+edgeSort8/loop1_1__loop2_1__loop3_4__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_619
+edgeSort8/loop1_1__loop2_1__loop3_5__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_618
+edgeSort8/loop1_1__loop2_1__loop3_6__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_617
+edgeSort8/loop1_1__loop2_1__loop3_7__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_616
+edgeSort8/loop1_1__loop2_1__loop3_8__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_615
+edgeSort8/loop1_1__loop2_1__loop3_9__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_614
+edgeSort8/loop1_2__loop2_2__loop3_0__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_591
+edgeSort8/loop1_2__loop2_2__loop3_1__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_590
+edgeSort8/loop1_2__loop2_2__loop3_2__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_589
+edgeSort8/loop1_2__loop2_2__loop3_3__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_588
+edgeSort8/loop1_2__loop2_2__loop3_4__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_587
+edgeSort8/loop1_2__loop2_2__loop3_5__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_586
+edgeSort8/loop1_2__loop2_2__loop3_6__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_585
+edgeSort8/loop1_2__loop2_2__loop3_7__genblk1_last_step_sort
+                                     2.6600      0.3     2.6600     0.0000  0.0000  bitonic_sort_2_584
+edgeSort8/loop1_3__loop2_4__loop3_0__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_559
+edgeSort8/loop1_3__loop2_4__loop3_1__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_558
+edgeSort8/loop1_3__loop2_4__loop3_2__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_557
+edgeSort8/loop1_3__loop2_4__loop3_3__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_556
+edgeSort8/loop1_3__loop2_5__loop3_0__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_555
+edgeSort8/loop1_3__loop2_5__loop3_1__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_554
+edgeSort8/loop1_3__loop2_5__loop3_2__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_553
+edgeSort8/loop1_3__loop2_5__loop3_3__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_552
+edgeSort8/loop1_4__loop2_10__loop3_0__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_523
+edgeSort8/loop1_4__loop2_10__loop3_1__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_522
+edgeSort8/loop1_4__loop2_9__loop3_0__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_525
+edgeSort8/loop1_4__loop2_9__loop3_1__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_524
+edgeSort8/loop1_5__loop2_19__loop3_0__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_492
+edgeSort8/loop1_5__loop2_20__loop3_0__genblk1_last_step_sort
+                                     1.0640      0.1     1.0640     0.0000  0.0000  bitonic_sort_2_491
+isOffCenter                          2.6600      0.3     0.0000     2.6600  0.0000  earlier_than_0
+isOnCenter                           2.6600      0.3     0.0000     2.6600  0.0000  earlier_than_1
+--------------------------------  ---------  -------  ---------  ---------  ------  ---------------------------------
+Total                                                 1019.3120     5.3200  0.0000
+
+1
