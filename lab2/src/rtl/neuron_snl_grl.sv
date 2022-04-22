@@ -80,6 +80,8 @@ module onoff_filter_comp_center (filter_center_in, filter_edge_in, on_center_out
     localparam NUM_SORTER_BITS = 2**SORTER_WIDTH;
     localparam NUM_PAD_BITS = NUM_SORTER_BITS - NUM_EDGE_PIXELS;
     localparam NUM_EDGE_PIXELS_HALF = NUM_EDGE_PIXELS / 2;
+    localparam ON_CENTER_INDEX = NUM_PAD_BITS+NUM_EDGE_PIXELS_HALF-1;
+    localparam OFF_CENTER_INDEX = NUM_SORTER_BITS-NUM_EDGE_PIXELS_HALF;
 
     input filter_center_in;
     input [0:NUM_EDGE_PIXELS - 1] filter_edge_in;
@@ -99,12 +101,12 @@ module onoff_filter_comp_center (filter_center_in, filter_edge_in, on_center_out
     // For on center, if filter_center_in earlier than sorted_edges[3], pass filter_center_in, else inhibit
     // Means earlier than half.
     // earlier_than isOnCenter (.a(filter_center_in), .b(sorted_edges[3]), .y(on_center_out));
-    earlier_than isOnCenter (.a(filter_center_in), .b(sorted_edges[NUM_PAD_BITS+NUM_EDGE_PIXELS_HALF-1]), .y(on_center_out));
+    earlier_than isOnCenter (.a(filter_center_in), .b(sorted_edges[ON_CENTER_INDEX]), .y(on_center_out));
 
     // For off center, if filter_center_in later than sorted_edges[4], pass sorted_edges[4], else inhibit
     // Means later than half.
     // earlier_than isOffCenter (.a(sorted_edges[4]), .b(filter_center_in), .y(off_center_out));
-    earlier_than isOffCenter (.a(sorted_edges[NUM_SORTER_BITS-NUM_EDGE_PIXELS_HALF]), .b(filter_center_in), .y(off_center_out));
+    earlier_than isOffCenter (.a(sorted_edges[OFF_CENTER_INDEX]), .b(filter_center_in), .y(off_center_out));
 
 endmodule
 
