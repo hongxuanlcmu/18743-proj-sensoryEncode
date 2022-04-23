@@ -72,19 +72,23 @@ module neuron_snl_grl (output_spike, input_spikes, input_weights);
 
 endmodule
 
-module onoff_filter_comp_center (filter_center_in, filter_edge_in, on_center_out, off_center_out);
+module onoff_filter_comp_center (filter_center_in, filter_edge_in, on_center_index, off_center_index, on_center_out, off_center_out,);
 
-    parameter FILTER_WIDTH = 3;
-    parameter SORTER_WIDTH = 3;
+    // (3,3) (5,5) (7,6) (9,7)
+    parameter FILTER_WIDTH = 9;
+    parameter SORTER_WIDTH = 7;
     localparam NUM_EDGE_PIXELS = FILTER_WIDTH**2 - 1;
     localparam NUM_SORTER_BITS = 2**SORTER_WIDTH;
     localparam NUM_PAD_BITS = NUM_SORTER_BITS - NUM_EDGE_PIXELS;
     localparam NUM_EDGE_PIXELS_HALF = NUM_EDGE_PIXELS / 2;
-    localparam ON_CENTER_INDEX = NUM_PAD_BITS+NUM_EDGE_PIXELS_HALF-1;
-    localparam OFF_CENTER_INDEX = NUM_SORTER_BITS-NUM_EDGE_PIXELS_HALF;
+    // localparam ON_CENTER_INDEX = NUM_PAD_BITS + NUM_EDGE_PIXELS_HALF - 1;
+    // localparam OFF_CENTER_INDEX = NUM_SORTER_BITS - NUM_EDGE_PIXELS_HALF;
 
     input filter_center_in;
     input [0:NUM_EDGE_PIXELS - 1] filter_edge_in;
+    // Indices for sorted_edges
+    input [SORTER_WIDTH-1:0] on_center_index;
+    input [SORTER_WIDTH-1:0] off_center_index;
     output on_center_out;
     output off_center_out;
 
@@ -101,12 +105,12 @@ module onoff_filter_comp_center (filter_center_in, filter_edge_in, on_center_out
     // For on center, if filter_center_in earlier than sorted_edges[3], pass filter_center_in, else inhibit
     // Means earlier than half.
     // earlier_than isOnCenter (.a(filter_center_in), .b(sorted_edges[3]), .y(on_center_out));
-    earlier_than isOnCenter (.a(filter_center_in), .b(sorted_edges[ON_CENTER_INDEX]), .y(on_center_out));
+    earlier_than isOnCenter (.a(filter_center_in), .b(sorted_edges[on_center_index]), .y(on_center_out));
 
     // For off center, if filter_center_in later than sorted_edges[4], pass sorted_edges[4], else inhibit
     // Means later than half.
     // earlier_than isOffCenter (.a(sorted_edges[4]), .b(filter_center_in), .y(off_center_out));
-    earlier_than isOffCenter (.a(sorted_edges[OFF_CENTER_INDEX]), .b(filter_center_in), .y(off_center_out));
+    earlier_than isOffCenter (.a(sorted_edges[off_center_index]), .b(filter_center_in), .y(off_center_out));
 
 endmodule
 
