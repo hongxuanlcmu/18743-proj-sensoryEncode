@@ -72,45 +72,56 @@ module neuron_snl_grl (output_spike, input_spikes, input_weights);
 
 endmodule
 
-module onoff_filter_comp_center (filter_center_in, filter_edge_in, on_center_index, off_center_index, on_center_out, off_center_out,);
+module multiplier(
+    // unsigned multiplicand
+    input logic [7:0] multiplicand,
+    // signed multiplier
+    input logic [7:0] multiplier,
+    output logic [15:0] product
+);
+    logic [8:0] multiplicand_extend; // zero extend multiplicand
+    assign multiplicand_extend = {1'b0,multiplicand};
+    logic [8:0] multiplier_extend; // sign extend multiplier
+    assign multiplier_extend = {multiplier[7], multiplier};
+    logic [17:0] product_intermediate;
+    assign product_intermediate = multiplicand_extend * multiplier_extend;
+    // assume product does not overflow 16 bits
+    assign product = product_intermediate[15:0];
+endmodule
 
-    // (3,3) (5,5) (7,6) (9,7)
-    parameter FILTER_WIDTH = 9;
-    parameter SORTER_WIDTH = 7;
-    localparam NUM_EDGE_PIXELS = FILTER_WIDTH**2 - 1;
-    localparam NUM_SORTER_BITS = 2**SORTER_WIDTH;
-    localparam NUM_PAD_BITS = NUM_SORTER_BITS - NUM_EDGE_PIXELS;
-    localparam NUM_EDGE_PIXELS_HALF = NUM_EDGE_PIXELS / 2;
-    // localparam ON_CENTER_INDEX = NUM_PAD_BITS + NUM_EDGE_PIXELS_HALF - 1;
-    // localparam OFF_CENTER_INDEX = NUM_SORTER_BITS - NUM_EDGE_PIXELS_HALF;
+// 
+module onoff_filter_comp_center #(
+    parameter FILTER_WIDTH = 5
+)
+(
+    // fixed point filter weight, 2's complement, represents weight * 128 (7 bits shift)
+    input logic [FILTER_WIDTH-1:0][FILTER_WIDTH-1:0][7:0] filter_weights, 
+    // 8 bit greyscale unsigned integers
+    input logic [FILTER_WIDTH-1:0][FILTER_WIDTH-1:0][7:0] filter_in, 
+    output logic [7:0] conv_out
+);
+//Warning:  File /afs/andrew.cmu.edu/usr8/hongxuan/18743/18743-proj-sensoryEncode/lab2/SYNTH/onoff_filter/work/bitonic_sort_32-verilog.pvl not found, or does not contain a usable description of bitonic_sort_32. (ELAB-320)
+    logic [FILTER_WIDTH-1:0][FILTER_WIDTH-1:0][15:0] intermediate_out;
+    logic [20:0] intermediate_sum;
+    assign conv_out = intermediate_sum[20:13];
+    
+    genvar i, j;
+    generate
+        for(i=0; i<FILTER_WIDTH; i+=1) begin
+            for(j=0; j<FILTER_WIDTH; j+=1) begin
+                multiplier mult(filter_weights[i][j], filter_in[i][j], intermediate_out[i][j]);
+            end
+        end
+    endgenerate
 
-    input filter_center_in;
-    input [0:NUM_EDGE_PIXELS - 1] filter_edge_in;
-    // Indices for sorted_edges
-    input [SORTER_WIDTH-1:0] on_center_index;
-    input [SORTER_WIDTH-1:0] off_center_index;
-    output on_center_out;
-    output off_center_out;
-
-    logic [0:NUM_SORTER_BITS - 1] sorted_edges;
-
-// 0 1 2 3 4 5 6 7
-// 7 6 5 4 3 2 1 0
-
-// 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
-// in in in in in in in in 23 22 21 20 19 18 17 16 15 14 13 12 11 10 09 08 07 06 05 04 03 02 01 00
-
-    bitonic_sort_32 #(.N(SORTER_WIDTH)) edgeSort8 (.sorted_out(sorted_edges), .raw_in({filter_edge_in, {NUM_PAD_BITS{1'b0}}}));
-
-    // For on center, if filter_center_in earlier than sorted_edges[3], pass filter_center_in, else inhibit
-    // Means earlier than half.
-    // earlier_than isOnCenter (.a(filter_center_in), .b(sorted_edges[3]), .y(on_center_out));
-    earlier_than isOnCenter (.a(filter_center_in), .b(sorted_edges[on_center_index]), .y(on_center_out));
-
-    // For off center, if filter_center_in later than sorted_edges[4], pass sorted_edges[4], else inhibit
-    // Means later than half.
-    // earlier_than isOffCenter (.a(sorted_edges[4]), .b(filter_center_in), .y(off_center_out));
-    earlier_than isOffCenter (.a(sorted_edges[off_center_index]), .b(filter_center_in), .y(off_center_out));
+    always_comb begin : summation
+        intermediate_sum = 21'd0;
+        for(int sumi=0; sumi<FILTER_WIDTH; sumi+=1) begin
+            for(int sumj=0; sumj<FILTER_WIDTH; sumj+=1) begin
+                intermediate_sum += intermediate_out[sumi][sumj];
+            end
+        end
+    end : summation
 
 endmodule
 
