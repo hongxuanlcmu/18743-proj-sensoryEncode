@@ -72,7 +72,7 @@ module neuron_snl_grl (output_spike, input_spikes, input_weights);
 
 endmodule
 
-module onoff_filter_comp_center (filter_center_in, filter_edge_in, on_center_index, off_center_index, on_center_out, off_center_out,);
+module onoff_filter_comp_center (filter_center_in, filter_edge_in, on_center_index, off_center_index, on_center_out, off_center_out);
 
     // (3,3) (5,5) (7,6) (9,7)
     parameter FILTER_WIDTH = 9;
