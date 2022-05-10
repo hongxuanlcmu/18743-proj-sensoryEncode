@@ -1,8 +1,8 @@
 # 18743-proj-sensoryEncode
 
-Branches:
+## Branches:
 
-Python Implementations:
+### Python Implementations:
 
 Implementation 1: main
 
@@ -14,7 +14,7 @@ Non-linear light intensity translation: intensityTranslation
 
 DoG conv: dogconv
 
-RTL Implementations:
+### RTL Implementations:
 
 Fixed Indices: rtl_try_sizes
 
